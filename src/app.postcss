@@ -1,0 +1,115 @@
+@tailwind base;
+/* Write your global styles here, in PostCSS syntax */
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: Quicksand;
+    font-style: normal;
+    font-weight: 500;
+    src: url(/Quicksand.ttf) format("truetype");
+  }
+}
+
+@layer components {
+  html {
+    @apply overflow-hidden;
+
+    font-size: 16px;
+  }
+  h1 {
+    @apply font-bold text-4xl mb-8;
+  }
+  h2 {
+    @apply font-bold text-2xl mb-4;
+  }
+  h3 {
+    @apply font-bold text-xl mb-2;
+  }
+  h4 {
+    @apply font-bold;
+  }
+  body {
+    @apply text-gray-700;
+
+    --primary: #01283e;
+    --secondary: #02517e;
+  }
+
+  code {
+    @apply bg-gray-200 text-sm px-2 py-1;
+  }
+
+  .btn {
+    @apply w-full
+      inline-flex
+      justify-center
+      items-center
+      rounded-md
+      border
+      shadow-sm
+      px-4
+      py-2
+      text-base
+      font-medium
+      focus:outline-none
+      focus:ring-2
+      focus:ring-offset-2
+      focus:ring-indigo-500
+      sm:w-auto
+      sm:text-sm;
+  }
+
+  .btn-primary {
+    @apply btn
+      bg-blue-600
+      text-white
+      hover:bg-blue-700
+      focus:ring-blue-500;
+  }
+
+  .btn-primary:disabled {
+    @apply bg-blue-200
+      cursor-default;
+  }
+
+  .btn-danger {
+    @apply btn
+      bg-red-600
+      text-white
+      hover:bg-red-700
+      focus:ring-red-500;
+  }
+
+  .btn-danger:disabled {
+    @apply bg-red-200
+      cursor-default;
+  }
+
+  .btn-secondary {
+    @apply btn
+      bg-gray-600
+      text-white
+      hover:bg-gray-700
+      focus:ring-gray-500;
+  }
+
+  .btn-secondary:disabled {
+    @apply bg-gray-200
+      cursor-default;
+  }
+
+  .btn-secondary-outline {
+    @apply btn
+      border-gray-300
+      bg-white
+      text-gray-700
+      hover:bg-gray-50;
+  }
+
+  .btn-secondary-outline:disabled {
+    @apply text-gray-300
+      cursor-default;
+  }
+}

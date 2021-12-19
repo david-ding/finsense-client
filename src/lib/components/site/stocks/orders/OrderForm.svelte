@@ -1,0 +1,84 @@
+<script lang="ts">
+  import { setContext } from "svelte";
+  import type { SelectOption } from "svelte-selectable";
+
+  import type { Order, OrderType } from "../../../../entities/order";
+  import { validationErrors } from "../../../../stores/features/orders/orders.derived-stores";
+  import { stockSymbolsApiEndpoints } from "../../../../stores/features/stock-symbols/stock-symbols.api";
+  import { stockSymbolOptions } from "../../../../stores/features/stock-symbols/stock-symbols.derived-stores";
+  import { stockSymbolsActions } from "../../../../stores/features/stock-symbols/stock-symbols.store";
+  import { dispatch } from "../../../../stores/redux-store";
+  import CurrencyInput from "../../../common/form/CurrencyInput.svelte";
+  import DateInput from "../../../common/form/DateInput.svelte";
+  import FormField from "../../../common/form/FormField.svelte";
+  import Input from "../../../common/form/Input.svelte";
+  import Select from "../../../common/form/Select.svelte";
+  import Typeahead from "../../../common/form/Typeahead.svelte";
+
+  const ORDER_TYPE_OPTIONS: Array<SelectOption> = [
+    { value: "buy", label: "Buy" },
+    { value: "sell", label: "Sell" },
+  ];
+
+  export let orderType: OrderType = null;
+  export let order: Order = { type: orderType };
+  $: buySellText = orderType === "sell" ? "Sell" : "Buy";
+
+  setContext("errorMessages", validationErrors);
+
+  const resetStockSymbols = () => dispatch(stockSymbolsActions.reset());
+</script>
+
+<div class="grid grid-cols-3 gap-4">
+  <FormField class="col-span-2" label="Symbol" name="symbol" let:htmlId let:invalid>
+    <Typeahead
+      appendTo="#modal-frame"
+      bind:value={order.symbol}
+      on:clear={resetStockSymbols}
+      on:reset={resetStockSymbols}
+      {htmlId}
+      {invalid}
+      options={$stockSymbolOptions}
+      searchFn={(query) => dispatch(stockSymbolsApiEndpoints.search.initiate(query))}
+    />
+  </FormField>
+  <FormField label="Type" name="type" let:htmlId let:invalid>
+    <Select
+      appendTo="#modal-frame"
+      bind:value={order.type}
+      {htmlId}
+      {invalid}
+      options={ORDER_TYPE_OPTIONS}
+    />
+  </FormField>
+  <FormField class="col-span-3" label={`${buySellText} Date`} name="date" let:htmlId let:invalid>
+    <DateInput maxDate={new Date()} bind:value={order.date} {htmlId} {invalid} />
+  </FormField>
+  <FormField
+    class="col-span-3 sm:col-span-1"
+    label={`${buySellText} Price`}
+    name="price"
+    let:htmlId
+    let:invalid
+  >
+    <CurrencyInput bind:value={order.price} {htmlId} {invalid} />
+  </FormField>
+  <FormField
+    class="col-span-3 sm:col-span-1"
+    label={`${buySellText} Quantity`}
+    name="quantity"
+    let:htmlId
+    let:invalid
+  >
+    <Input type="number" bind:value={order.quantity} {htmlId} {invalid} />
+  </FormField>
+  <FormField
+    class="col-span-3 sm:col-span-1"
+    label={`${buySellText} Fees`}
+    name="fee"
+    let:htmlId
+    let:invalid
+  >
+    <CurrencyInput bind:value={order.fee} {htmlId} {invalid} />
+  </FormField>
+</div>

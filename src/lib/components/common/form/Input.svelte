@@ -1,12 +1,14 @@
 <script lang="ts">
   import mergeClassNames from "../../../utils/merge-class-names";
   import { imask } from "@imask/svelte";
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher, getContext } from "svelte";
+  import type { Observable } from "rxjs";
 
-  export let htmlId: string = null;
-  export let invalid: boolean = false;
+  const invalid = getContext<Observable<boolean>>("invalid");
+  const htmlId = getContext<string>("htmlId");
+
   export let maskOptions: unknown = null;
-  export let name: string = htmlId;
+  export let name: string = null;
   export let placeholder: string = null;
   export let prefix: string = null;
   export let type: "text" | "number" | "date" = "text";
@@ -29,7 +31,7 @@
   {/if}
   <input
     {type}
-    {name}
+    name={name || htmlId}
     on:input={handleInput}
     id={htmlId}
     class={mergeClassNames([
@@ -41,7 +43,7 @@
       { "pl-6": !!prefix },
       "sm:text-sm",
       "border-gray-300",
-      invalid ? "border-red-300 focus:ring-red-500 focus:border-red-500" : null,
+      $invalid ? "border-red-300 focus:ring-red-500 focus:border-red-500" : null,
       "rounded-md",
     ])}
     {placeholder}

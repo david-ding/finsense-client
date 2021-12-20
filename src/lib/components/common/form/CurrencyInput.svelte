@@ -3,9 +3,7 @@
   import { createCurrencyAmount } from "../../../utils/currency-amount.utils";
   import Input from "./Input.svelte";
 
-  export let htmlId: string = null;
-  export let invalid: boolean = false;
-  export let name: string = htmlId;
+  export let name: string = null;
   export let value: CurrencyAmount = null;
   $: inputValue = value?.value;
 
@@ -15,8 +13,6 @@
 </script>
 
 <Input
-  {htmlId}
-  {invalid}
   {name}
   on:input={handleInput}
   maskOptions={{

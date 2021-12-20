@@ -1,10 +1,13 @@
 <script lang="ts">
+  import type { Observable } from "rxjs";
   import { debounce } from "lodash-es";
+  import { getContext } from "svelte";
   import SvelteSelectableSelect, { SelectOption } from "svelte-selectable";
 
+  const invalid = getContext<Observable<boolean>>("invalid");
+  const htmlId = getContext<string>("htmlId");
+
   export let appendTo: string = "main";
-  export let htmlId: string = null;
-  export let invalid: boolean = false;
   export let options: Array<SelectOption> = null;
   export let searchFn: (query: string) => void = null;
   export let showChevron: boolean = true;
@@ -18,7 +21,7 @@
 <SvelteSelectableSelect
   {appendTo}
   {htmlId}
-  {invalid}
+  invalid={$invalid}
   {options}
   searchable={true}
   searchFn={debouncedSearchFn}

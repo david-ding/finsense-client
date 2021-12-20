@@ -1,7 +1,6 @@
 <script lang="ts">
   import { setContext } from "svelte";
   import type { SelectOption } from "svelte-selectable";
-
   import type { Order, OrderType } from "../../../../entities/order";
   import { validationErrors } from "../../../../stores/features/orders/orders.derived-stores";
   import { stockSymbolsApiEndpoints } from "../../../../stores/features/stock-symbols/stock-symbols.api";
@@ -30,55 +29,29 @@
 </script>
 
 <div class="grid grid-cols-3 gap-4">
-  <FormField class="col-span-2" label="Symbol" name="symbol" let:htmlId let:invalid>
+  <FormField class="col-span-2" label="Symbol" name="symbol">
     <Typeahead
       appendTo="#modal-frame"
       bind:value={order.symbol}
       on:clear={resetStockSymbols}
       on:reset={resetStockSymbols}
-      {htmlId}
-      {invalid}
       options={$stockSymbolOptions}
       searchFn={(query) => dispatch(stockSymbolsApiEndpoints.search.initiate(query))}
     />
   </FormField>
-  <FormField label="Type" name="type" let:htmlId let:invalid>
-    <Select
-      appendTo="#modal-frame"
-      bind:value={order.type}
-      {htmlId}
-      {invalid}
-      options={ORDER_TYPE_OPTIONS}
-    />
+  <FormField label="Type" name="type">
+    <Select appendTo="#modal-frame" bind:value={order.type} options={ORDER_TYPE_OPTIONS} />
   </FormField>
-  <FormField class="col-span-3" label={`${buySellText} Date`} name="date" let:htmlId let:invalid>
-    <DateInput maxDate={new Date()} bind:value={order.date} {htmlId} {invalid} />
+  <FormField class="col-span-3" label={`${buySellText} Date`} name="date">
+    <DateInput maxDate={new Date()} bind:value={order.date} />
   </FormField>
-  <FormField
-    class="col-span-3 sm:col-span-1"
-    label={`${buySellText} Price`}
-    name="price"
-    let:htmlId
-    let:invalid
-  >
-    <CurrencyInput bind:value={order.price} {htmlId} {invalid} />
+  <FormField class="col-span-3 sm:col-span-1" label={`${buySellText} Price`} name="price">
+    <CurrencyInput bind:value={order.price} />
   </FormField>
-  <FormField
-    class="col-span-3 sm:col-span-1"
-    label={`${buySellText} Quantity`}
-    name="quantity"
-    let:htmlId
-    let:invalid
-  >
-    <Input type="number" bind:value={order.quantity} {htmlId} {invalid} />
+  <FormField class="col-span-3 sm:col-span-1" label={`${buySellText} Quantity`} name="quantity">
+    <Input type="number" bind:value={order.quantity} />
   </FormField>
-  <FormField
-    class="col-span-3 sm:col-span-1"
-    label={`${buySellText} Fees`}
-    name="fee"
-    let:htmlId
-    let:invalid
-  >
-    <CurrencyInput bind:value={order.fee} {htmlId} {invalid} />
+  <FormField class="col-span-3 sm:col-span-1" label={`${buySellText} Fees`} name="fee">
+    <CurrencyInput bind:value={order.fee} />
   </FormField>
 </div>

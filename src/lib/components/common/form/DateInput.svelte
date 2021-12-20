@@ -4,9 +4,7 @@
 
   const DATE_FORMAT = "YYYY-MM-DD";
 
-  export let htmlId: string = null;
-  export let invalid: boolean = false;
-  export let name: string = htmlId;
+  export let name: string = null;
   export let value: Date = null;
   export let minDate: Date = null;
   export let maxDate: Date = null;
@@ -24,13 +22,4 @@
   };
 </script>
 
-<Input
-  {htmlId}
-  {invalid}
-  {name}
-  on:input={handleInput}
-  type="date"
-  {min}
-  {max}
-  value={inputValue}
-/>
+<Input {name} on:input={handleInput} type="date" {min} {max} value={inputValue} />

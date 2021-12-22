@@ -7,20 +7,19 @@
   import type { ValidationErrors } from "../../../entities/validation-errors";
   import mergeClassNames from "../../../utils/merge-class-names";
   import { observe } from "../../../utils/store.utils";
+  import Tooltip from "../Tooltip.svelte";
 
   let classNames: ClassNames = null;
   export let name: string;
   export let label: string = null;
   export let htmlId: string = _generateHtmlId();
 
-  const errorMessages = getContext<Readable<ValidationErrors>>("errorMessages");
-  setContext(
-    "invalid",
-    observe(errorMessages).pipe(
-      map((errorMessages) => errorMessages?.[name]),
-      map(negate(isEmpty)),
-    ),
+  const fieldError = observe(getContext<Readable<ValidationErrors>>("errorMessages")).pipe(
+    map((errorMessages) => errorMessages?.[name]),
   );
+  const invalid = fieldError.pipe(map(negate(isEmpty)));
+
+  setContext("invalid", invalid);
   setContext("htmlId", htmlId);
 
   function _generateHtmlId(): string {
@@ -33,10 +32,8 @@
 <div class={mergeClassNames(classNames)}>
   <label for={htmlId} class="block text-sm font-medium text-gray-700">{label}</label>
   <div class="mt-1 relative">
-    <slot {htmlId} invalid={!!$errorMessages?.[name]?.length} />
+    <Tooltip message={$fieldError}>
+      <slot {htmlId} invalid={$invalid} />
+    </Tooltip>
   </div>
-
-  {#if $errorMessages?.[name]}
-    <small class="text-xs text-red-600">{$errorMessages[name]}</small>
-  {/if}
 </div>

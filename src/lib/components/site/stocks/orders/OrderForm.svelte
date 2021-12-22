@@ -21,7 +21,6 @@
 
   export let orderType: OrderType = null;
   export let order: Order = { type: orderType };
-  $: buySellText = orderType === "sell" ? "Sell" : "Buy";
 
   setContext("errorMessages", validationErrors);
 
@@ -42,16 +41,16 @@
   <FormField label="Type" name="type">
     <Select appendTo="#modal-frame" bind:value={order.type} options={ORDER_TYPE_OPTIONS} />
   </FormField>
-  <FormField class="col-span-3" label={`${buySellText} Date`} name="date">
+  <FormField class="col-span-3" label="Date" name="date">
     <DateInput maxDate={new Date()} bind:value={order.date} />
   </FormField>
-  <FormField class="col-span-3 sm:col-span-1" label={`${buySellText} Price`} name="price">
+  <FormField class="col-span-3 sm:col-span-1" label="Price" name="price">
     <CurrencyInput bind:value={order.price} />
   </FormField>
-  <FormField class="col-span-3 sm:col-span-1" label={`${buySellText} Quantity`} name="quantity">
+  <FormField class="col-span-3 sm:col-span-1" label="Quantity" name="quantity">
     <Input type="number" bind:value={order.quantity} />
   </FormField>
-  <FormField class="col-span-3 sm:col-span-1" label={`${buySellText} Fees`} name="fee">
+  <FormField class="col-span-3 sm:col-span-1" label="Fees" name="fee">
     <CurrencyInput bind:value={order.fee} />
   </FormField>
 </div>

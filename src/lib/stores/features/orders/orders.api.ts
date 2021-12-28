@@ -25,6 +25,23 @@ export const ordersApi = createApi({
         };
       },
     }),
+    update: builder.mutation<Order, Partial<Order>>({
+      query({ id, ...body }) {
+        return {
+          url: `/orders/${id}`,
+          method: "PUT",
+          body,
+        };
+      },
+    }),
+    delete: builder.mutation<{ id: string }, string>({
+      query(id) {
+        return {
+          url: `/orders/${id}`,
+          method: "DELETE",
+        };
+      },
+    }),
   }),
 });
 

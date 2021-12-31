@@ -4,7 +4,7 @@ export const createCurrencyAmount = (value: number | string, code?: string): Cur
   code = code || "AUD";
 
   if (typeof value === "string") {
-    const parsedValue = parseFloat(value.replaceAll(/[^0-9]/g, ""));
+    const parsedValue = parseFloat(value.replaceAll(/[^0-9.]/g, ""));
     value = isNaN(parsedValue) ? null : parsedValue;
   }
   return { code, value };

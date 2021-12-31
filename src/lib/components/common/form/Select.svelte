@@ -31,6 +31,7 @@
   bind:value
   on:clear
   on:reset
+  on:select
   --borderRadius="0.375rem"
   --lineHeight="1.25rem"
   --fontSize="0.875rem"

@@ -22,9 +22,15 @@
   export let orderType: OrderType = null;
   export let order: Order = { type: orderType };
 
+  let currencyCode: string;
+
   setContext("errorMessages", validationErrors);
 
   const resetStockSymbols = () => dispatch(stockSymbolsActions.reset());
+  const setCurrencyCode = (event: CustomEvent) => {
+    const stockSymbol = event.detail;
+    currencyCode = stockSymbol.value.endsWith(".AX") ? "AUD" : "USD";
+  };
 </script>
 
 <div class="grid grid-cols-3 gap-4">
@@ -34,6 +40,7 @@
       bind:value={order.symbol}
       on:clear={resetStockSymbols}
       on:reset={resetStockSymbols}
+      on:select={setCurrencyCode}
       options={$stockSymbolOptions}
       searchFn={(query) => dispatch(stockSymbolsApiEndpoints.search.initiate(query))}
     />
@@ -45,7 +52,7 @@
     <DateInput maxDate={new Date()} bind:value={order.date} />
   </FormField>
   <FormField class="col-span-3 sm:col-span-1" label="Price" name="price">
-    <CurrencyInput bind:value={order.price} />
+    <CurrencyInput bind:value={order.price} {currencyCode} />
   </FormField>
   <FormField class="col-span-3 sm:col-span-1" label="Quantity" name="quantity">
     <Input type="number" min={0} bind:value={order.quantity} />

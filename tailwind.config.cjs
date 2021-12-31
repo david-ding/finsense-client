@@ -9,6 +9,10 @@ const config = {
       colors: {
         primary: "var(--primary)",
         secondary: "var(--secondary)",
+        tertiary: "var(--tertiary)",
+      },
+      fontSize: {
+        tiny: '.75rem',
       },
     },
   },

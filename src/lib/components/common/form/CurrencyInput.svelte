@@ -3,12 +3,13 @@
   import { createCurrencyAmount } from "../../../utils/currency-amount.utils";
   import Input from "./Input.svelte";
 
+  export let currencyCode: string = "AUD";
   export let name: string = null;
   export let value: CurrencyAmount = null;
   $: inputValue = value?.value;
 
   const handleInput = (event: CustomEvent) => {
-    value = createCurrencyAmount(event.detail, value?.code);
+    value = createCurrencyAmount(event.detail, value?.code || currencyCode);
   };
 </script>
 

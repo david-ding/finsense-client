@@ -35,6 +35,7 @@
 
     --primary: #01283e;
     --secondary: #02517e;
+    --tertiary: #294758;
   }
 
   code {
@@ -111,5 +112,24 @@
   .btn-secondary-outline:disabled {
     @apply text-gray-300
       cursor-default;
+  }
+
+  .loading-placeholder {
+    @apply overflow-hidden relative bg-gray-500;
+  }
+
+  .loading-placeholder::after {
+    content: " ";
+    box-shadow: 0 0 50px 9px rgba(254,254,254);
+    position: absolute;
+    top: 0;
+    left: -100%;
+    height: 100%;
+    animation: loading 1s infinite;
+  }
+
+  @keyframes loading {
+    0% { left: -100% }
+    100% { left: 150% }
   }
 }

@@ -8,5 +8,5 @@
 </script>
 
 {#if isNumber(amount?.value)}
-  $<Number value={amount.value} />
+  {amount.code === "USD" ? "U" : "A"}$<Number value={amount.value} />
 {/if}

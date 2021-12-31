@@ -19,6 +19,7 @@
   bind:value
   on:clear
   on:reset
+  on:select
   showChevron={false}
   showEmptyResults={false}
 />

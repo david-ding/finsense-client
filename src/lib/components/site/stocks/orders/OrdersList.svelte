@@ -18,6 +18,7 @@
     { prop: "type" },
     { prop: "symbol" },
     { prop: "price" },
+    { prop: "quantity" },
     { prop: "fee" },
     { prop: "date" },
   ];

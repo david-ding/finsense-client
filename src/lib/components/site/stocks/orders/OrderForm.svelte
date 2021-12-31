@@ -57,7 +57,4 @@
   <FormField class="col-span-3 sm:col-span-1" label="Quantity" name="quantity">
     <Input type="number" min={0} bind:value={order.quantity} />
   </FormField>
-  <FormField class="col-span-3 sm:col-span-1" label="Fees" name="fee">
-    <CurrencyInput bind:value={order.fee} />
-  </FormField>
 </div>

@@ -9,5 +9,4 @@ export type Order = {
   date?: Date;
   price?: CurrencyAmount;
   quantity?: number;
-  fee?: CurrencyAmount;
 } & Identifiable;

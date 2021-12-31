@@ -19,7 +19,6 @@
     { prop: "symbol" },
     { prop: "price" },
     { prop: "quantity" },
-    { prop: "fee" },
     { prop: "date" },
   ];
 
@@ -41,7 +40,7 @@
 
 <Table {columns} rows={$orders}>
   <div slot="cell" let:column let:row>
-    {#if column.prop === "price" || column.prop === "fee"}
+    {#if column.prop === "price"}
       <CurrencyAmount amount={row[column.prop]} />
     {:else if column.prop === "date"}
       <DateTime value={row.date} />

@@ -2,6 +2,8 @@
   export type HoldingsListItem = {
     gainLossAmount?: CurrencyAmount;
     gainLossPercent?: string;
+    dayGainLossAmount?: CurrencyAmount;
+    dayGainLossPercent?: string;
     marketValue?: CurrencyAmount;
     percent?: string;
   } & Holding;
@@ -16,20 +18,29 @@
     return percentageOf(diff, holding.avgPrice);
   }
 
+  function getDayGainLossAmount(holding: Holding) {
+    const diff = subtract(holding.price, holding.prevPrice);
+    return multiply(diff, holding.quantity);
+  }
+
+  function getDayGainLossPercent(holding: Holding) {
+    const diff = subtract(holding.price, holding.prevPrice);
+    return percentageOf(diff, holding.prevPrice);
+  }
+
   export const holdingsListItems = derived(
     [holdings, totalMarketValue],
     ([$holdings, $totalMarketValue]) => {
       return $holdings.map((holding) => {
-        const gainLossAmount = getGainLossAmount(holding);
-        const gainLossPercent = getGainLossPercent(holding);
         const marketValue = multiply(holding.price, holding.quantity);
-        const percent = percentageOf(marketValue, $totalMarketValue);
         return {
           ...holding,
-          gainLossAmount,
-          gainLossPercent,
+          gainLossAmount: getGainLossAmount(holding),
+          gainLossPercent: getGainLossPercent(holding),
+          dayGainLossAmount: getDayGainLossAmount(holding),
+          dayGainLossPercent: getDayGainLossPercent(holding),
           marketValue,
-          percent,
+          percent: percentageOf(marketValue, $totalMarketValue),
         } as HoldingsListItem;
       });
     },
@@ -61,6 +72,7 @@
     { prop: "avgPrice" },
     { prop: "quantity" },
     { prop: "price" },
+    { prop: "dayGainLoss", name: "Day Gain/Loss" },
     { prop: "gainLoss", name: "Gain/Loss" },
     { prop: "marketValue" },
     { prop: "percent", name: "%" },
@@ -91,6 +103,13 @@
         class:text-green-600={row.gainLossAmount.value > 0}
       >
         <CurrencyAmountFormatter amount={row.gainLossAmount} /> ({row.gainLossPercent})
+      </div>
+    {:else if column.prop === "dayGainLoss"}
+      <div
+        class:text-red-500={row.dayGainLossAmount.value < 0}
+        class:text-green-600={row.dayGainLossAmount.value > 0}
+      >
+        <CurrencyAmountFormatter amount={row.dayGainLossAmount} /> ({row.dayGainLossPercent})
       </div>
     {:else}
       {row[column.prop]}

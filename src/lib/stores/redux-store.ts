@@ -5,6 +5,8 @@ import { stockSymbolsApi } from "./features/stock-symbols/stock-symbols.api";
 import stockSymbolsReducer from "./features/stock-symbols/stock-symbols.store";
 import { exchangeRatesApi } from "./features/exchange-rates/exchange-rates.api";
 import exchangeRatesReducer from "./features/exchange-rates/exchange-rates.store";
+import { holdingsApi } from "./features/holdings/holdings.api";
+import holdingsReducer from "./features/holdings/holdings.store";
 
 const reduxStore = configureStore({
   reducer: {
@@ -14,6 +16,8 @@ const reduxStore = configureStore({
     [ordersApi.reducerPath]: ordersApi.reducer,
     exchangeRates: exchangeRatesReducer,
     [exchangeRatesApi.reducerPath]: exchangeRatesApi.reducer,
+    holdings: holdingsReducer,
+    [holdingsApi.reducerPath]: holdingsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()

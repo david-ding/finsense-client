@@ -1,4 +1,4 @@
-import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { createEntityAdapter, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import type { EntityState } from "@reduxjs/toolkit";
 import type { Order } from "../../../entities/order";
 import { ordersApiEndpoints } from "./orders.api";
@@ -39,14 +39,24 @@ const {
   matchRejected: deleteMatchRejected,
 } = ordersApiEndpoints.delete;
 
-const matchPending = (action: unknown) => {
-  return (
-    indexMatchPending(action) ||
-    createMatchPending(action) ||
-    updateMatchPending(action) ||
-    deleteMatchPending(action)
-  );
-};
+const pendingAction = isAnyOf(
+  indexMatchPending,
+  createMatchPending,
+  updateMatchPending,
+  deleteMatchPending,
+);
+
+const completedAction = isAnyOf(
+  indexMatchFulfilled,
+  createMatchFulfilled,
+  createMatchRejected,
+  updateMatchFulfilled,
+  updateMatchRejected,
+  deleteMatchFulfilled,
+  deleteMatchRejected,
+);
+
+const modalClosingAction = isAnyOf(createMatchFulfilled, updateMatchFulfilled);
 
 const ordersSlice = createSlice({
   name: "orders",
@@ -61,65 +71,38 @@ const ordersSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addMatcher(matchPending, (state) => {
+    builder.addMatcher(pendingAction, (state) => {
       state.isLoading = true;
       state.validationErrors = null;
     });
+    builder.addMatcher(completedAction, (state) => {
+      state.isLoading = false;
+    });
+    builder.addMatcher(modalClosingAction, (state) => {
+      state.validationErrors = null;
+      state.orderModalDisplayed = null;
+    });
     builder.addMatcher(indexMatchFulfilled, (state, { payload }) =>
-      ordersAdapter.setAll(
-        {
-          ...state,
-          isLoading: false,
-        },
-        payload,
-      ),
+      ordersAdapter.setAll(state, payload),
     );
     builder.addMatcher(createMatchFulfilled, (state, { payload }) =>
-      ordersAdapter.addOne(
-        {
-          ...state,
-          isLoading: false,
-          validationErrors: null,
-          orderModalDisplayed: null,
-        },
-        payload,
-      ),
+      ordersAdapter.addOne(state, payload),
     );
     builder.addMatcher(createMatchRejected, (state, { payload }) => {
-      state.isLoading = false;
       state.validationErrors = payload.data.validationErrors;
     });
     builder.addMatcher(updateMatchFulfilled, (state, { payload }) =>
-      ordersAdapter.updateOne(
-        {
-          ...state,
-          isLoading: false,
-          validationErrors: null,
-          orderModalDisplayed: null,
-        },
-        {
-          id: payload.id,
-          changes: payload,
-        },
-      ),
+      ordersAdapter.updateOne(state, {
+        id: payload.id,
+        changes: payload,
+      }),
     );
     builder.addMatcher(updateMatchRejected, (state, { payload }) => {
-      state.isLoading = false;
       state.validationErrors = payload.data.validationErrors;
     });
     builder.addMatcher(deleteMatchFulfilled, (state, { payload }) =>
-      ordersAdapter.removeOne(
-        {
-          ...state,
-          isLoading: false,
-        },
-        payload.id,
-      ),
+      ordersAdapter.removeOne(state, payload.id),
     );
-    builder.addMatcher(deleteMatchRejected, (state) => {
-      state.isLoading = false;
-      // todo: add toast
-    });
   },
 });
 

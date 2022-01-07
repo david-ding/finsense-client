@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import type { ClassNames } from "../../../../entities/class-names";
   import type { Order } from "../../../../entities/order";
   import { ordersApiEndpoints } from "../../../../stores/features/orders/orders.api";
   import { orders } from "../../../../stores/features/orders/orders.derived-stores";
@@ -7,12 +8,15 @@
   import { dispatch } from "../../../../stores/redux-store";
   import Badge from "../../../common/Badge.svelte";
   import ConfirmModal from "../../../common/ConfirmModal.svelte";
-  import CurrencyAmount from "../../../common/formatters/CurrencyAmount.svelte";
-  import DateTime from "../../../common/formatters/DateTime.svelte";
+  import CurrencyAmountFormatter from "../../../common/formatters/CurrencyAmountFormatter.svelte";
+  import DateTimeFormatter from "../../../common/formatters/DateTimeFormatter.svelte";
   import Link from "../../../common/Link.svelte";
   import Table, { TableColumn } from "../../../common/Table.svelte";
 
+  let classNames: ClassNames = null;
   let confirmModal: ConfirmModal<Order>;
+
+  export { classNames as class };
 
   const columns: Array<TableColumn> = [
     { prop: "type" },
@@ -38,12 +42,12 @@
   }
 </script>
 
-<Table {columns} rows={$orders}>
+<Table class={classNames} {columns} rows={$orders}>
   <div slot="cell" let:column let:row>
     {#if column.prop === "price"}
-      <CurrencyAmount amount={row[column.prop]} />
+      <CurrencyAmountFormatter amount={row[column.prop]} />
     {:else if column.prop === "date"}
-      <DateTime value={row.date} />
+      <DateTimeFormatter value={row.date} />
     {:else if column.prop === "type"}
       <Badge class={{
         "bg-green-100 text-green-800": row.type === "buy",

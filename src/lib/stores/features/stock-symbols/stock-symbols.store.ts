@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { StockSymbol } from "../../../entities/stock-symbol";
-import { stockSymbolsApi } from "./stock-symbols.api";
+import { stockSymbolsApiEndpoints } from "./stock-symbols.api";
 
 export type StockSymbolState = {
   entities: Array<StockSymbol>;
@@ -12,7 +12,7 @@ const initialState: StockSymbolState = {
   isLoading: false,
 };
 
-const { matchPending, matchFulfilled } = stockSymbolsApi.endpoints.search;
+const { matchPending, matchFulfilled } = stockSymbolsApiEndpoints.search;
 
 const stockSymbolsSlice = createSlice({
   name: "stockSymbols",

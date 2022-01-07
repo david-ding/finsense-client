@@ -19,7 +19,4 @@
 </h2>
 
 <OrderModal />
-
-<div class="mt-4">
-  <OrdersList />
-</div>
+<OrdersList class="mt-4" />

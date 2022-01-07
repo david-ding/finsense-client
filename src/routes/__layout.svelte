@@ -24,6 +24,6 @@
   <Sidebar {menuItems} />
 </div>
 
-<main class="ml-64 p-4 h-screen overflow-y-auto">
+<main class="ml-64 p-4 bg-gray-100 h-screen overflow-y-auto">
   <slot />
 </main>

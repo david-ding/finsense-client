@@ -8,6 +8,7 @@
   const htmlId = getContext<string>("htmlId");
 
   export let appendTo: string = "main";
+  export let cursorType: "text" | "default" | "pointer" = "default";
   export let options: Array<SelectOption> = null;
   export let searchFn: (query: string) => void = null;
   export let showChevron: boolean = true;
@@ -45,4 +46,5 @@
   --dropdownBoxShadow="none"
   --dropdownItemBackgroundColorHighlighted="#6366f1"
   --dropdownItemBackgroundColorHover="#e0e7ff"
+  --cursor={cursorType}
 />

@@ -13,6 +13,7 @@
 
 <Select
   {appendTo}
+  cursorType="text"
   {options}
   {searchFn}
   {valueFormatterFn}

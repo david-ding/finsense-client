@@ -1,7 +1,7 @@
 import { createEntityAdapter, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import type { EntityState } from "@reduxjs/toolkit";
 import type { ExchangeRate } from "../../../entities/exchange-rate";
-import { exchangeRatesApi } from "./exchange-rates.api";
+import { exchangeRatesApiEndpoints } from "./exchange-rates.api";
 
 export type ExchangeRatesState = {
   isLoading: boolean;
@@ -17,13 +17,13 @@ const initialState: ExchangeRatesState = {
 };
 
 const pendingAction = isAnyOf(
-  exchangeRatesApi.endpoints.index.matchPending,
-  exchangeRatesApi.endpoints.update.matchPending,
+  exchangeRatesApiEndpoints.index.matchPending,
+  exchangeRatesApiEndpoints.update.matchPending,
 );
 
 const fulfilledAction = isAnyOf(
-  exchangeRatesApi.endpoints.index.matchFulfilled,
-  exchangeRatesApi.endpoints.update.matchFulfilled,
+  exchangeRatesApiEndpoints.index.matchFulfilled,
+  exchangeRatesApiEndpoints.update.matchFulfilled,
 );
 
 const exchangeRatesSlice = createSlice({

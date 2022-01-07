@@ -30,10 +30,7 @@ const holdingsSlice = createSlice({
     updateLiveQuote: (state, { payload }) => {
       holdingsAdapter.updateOne(state, {
         id: payload.symbol,
-        changes: {
-          ...payload,
-          _tracking: payload.price?.value < state.entities[payload.symbol].price?.value ? "dec" : "inc",
-        },
+        changes: payload,
       });
     },
   },

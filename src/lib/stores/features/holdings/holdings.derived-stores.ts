@@ -2,7 +2,6 @@ import { derived } from "svelte/store";
 import {
   add,
   convertToForeign,
-  isNegative,
   multiply,
   percentageOf,
   subtract,
@@ -46,8 +45,6 @@ export const gainPercentage = derived([gain, totalCost], ([$gain, $totalCost]) =
   percentageOf($gain, $totalCost),
 );
 
-export const isLoss = derived(gain, ($gain) => isNegative($gain));
-
 const totalPrevMarketValue = derived(holdings, ($holdings) =>
   add(...$holdings.map((holding) => multiply(holding.prevPrice, holding.quantity))),
 );
@@ -66,5 +63,3 @@ export const dayGainPercentage = derived(
   [dayGain, totalPrevMarketValue],
   ([$dayGain, $totalPrevMarketValue]) => percentageOf($dayGain, $totalPrevMarketValue),
 );
-
-export const isDayLoss = derived(dayGain, ($dayGain) => isNegative($dayGain));

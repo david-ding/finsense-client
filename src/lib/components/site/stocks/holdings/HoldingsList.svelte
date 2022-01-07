@@ -56,13 +56,14 @@
   import { holdingsApiEndpoints } from "../../../../stores/features/holdings/holdings.api";
   import {
     holdings,
-    isLiveMode,
     totalMarketValue,
   } from "../../../../stores/features/holdings/holdings.derived-stores";
   import { dispatch } from "../../../../stores/redux-store";
   import { multiply, subtract, percentageOf } from "../../../../utils/currency-amount.utils";
+  import ColoredGainLossStat from "../../../common/ColoredGainLossStat.svelte";
   import CurrencyAmountFormatter from "../../../common/formatters/CurrencyAmountFormatter.svelte";
   import Table, { TableColumn } from "../../../common/Table.svelte";
+  import TrackedNumberic from "../../../common/TrackedNumberic.svelte";
 
   let classNames: ClassNames = null;
   export { classNames as class };
@@ -88,29 +89,17 @@
   rowIdentifier={(holding) => holding.symbol}
 >
   <div slot="cell" let:column let:row>
-    {#if column.prop === "avgPrice" || column.prop === "marketValue"}
-      <CurrencyAmountFormatter amount={row[column.prop]} />
-    {:else if column.prop === "price"}
-      <div
-        class:animate-flash-green={$isLiveMode && row._tracking === "inc"}
-        class:animate-flash-red={$isLiveMode && row._tracking === "dec"}
-      >
+    {#if column.prop === "avgPrice" || column.prop === "marketValue" || column.prop === "price"}
+      <TrackedNumberic value={row[column.prop].value}>
         <CurrencyAmountFormatter amount={row[column.prop]} />
-      </div>
-    {:else if column.prop === "gainLoss"}
-      <div
-        class:text-red-500={row.gainLossAmount.value < 0}
-        class:text-green-600={row.gainLossAmount.value > 0}
-      >
-        <CurrencyAmountFormatter amount={row.gainLossAmount} /> ({row.gainLossPercent})
-      </div>
-    {:else if column.prop === "dayGainLoss"}
-      <div
-        class:text-red-500={row.dayGainLossAmount.value < 0}
-        class:text-green-600={row.dayGainLossAmount.value > 0}
-      >
-        <CurrencyAmountFormatter amount={row.dayGainLossAmount} /> ({row.dayGainLossPercent})
-      </div>
+      </TrackedNumberic>
+    {:else if column.prop === "gainLoss" || column.prop === "dayGainLoss"}
+      <TrackedNumberic value={row[`${column.prop}Amount`].value}>
+        <ColoredGainLossStat amount={row[`${column.prop}Amount`]}>
+          <CurrencyAmountFormatter amount={row[`${column.prop}Amount`]} />
+          ({row[`${column.prop}Percent`]})
+        </ColoredGainLossStat>
+      </TrackedNumberic>
     {:else}
       {row[column.prop]}
     {/if}

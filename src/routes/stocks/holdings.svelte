@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onDestroy, onMount } from "svelte";
+  import Button from "$lib/components/common/Button.svelte";
   import CurrencyAmountFormatter from "$lib/components/common/formatters/CurrencyAmountFormatter.svelte";
   import StatsCard from "$lib/components/common/StatsCard.svelte";
   import HoldingsList from "$lib/components/site/stocks/holdings/HoldingsList.svelte";
@@ -11,19 +11,18 @@
     gain,
     gainAud,
     gainPercentage,
-    isDayLoss,
     isLiveMode,
-    isLoss,
     totalMarketValue,
     totalMarketValueAud,
   } from "$lib/stores/features/holdings/holdings.derived-stores";
+  import { holdingsActions } from "$lib/stores/features/holdings/holdings.store";
   import { dispatch } from "$lib/stores/redux-store";
   import {
     connectFinnhubLiveQuotes,
     disconnectFinnhubLiveQuotes,
   } from "$lib/streams/finnhub.stream";
-  import Button from "$lib/components/common/Button.svelte";
-  import { holdingsActions } from "$lib/stores/features/holdings/holdings.store";
+  import { onDestroy, onMount } from "svelte";
+  import ColoredGainLossStat from "../../lib/components/common/ColoredGainLossStat.svelte";
 
   onMount(() => {
     dispatch(holdingsApiEndpoints.index.initiate());
@@ -62,21 +61,21 @@
   </StatsCard>
   <StatsCard class="col-span-12 md:col-span-4">
     <svelte:fragment slot="label">Gain/Loss</svelte:fragment>
-    <div class:text-red-600={$isLoss} class:text-green-600={!$isLoss} slot="value">
+    <ColoredGainLossStat amount={$gain} slot="value">
       <CurrencyAmountFormatter amount={$gain} />
       /
       <CurrencyAmountFormatter amount={$gainAud} />
       ({$gainPercentage})
-    </div>
+    </ColoredGainLossStat>
   </StatsCard>
   <StatsCard class="col-span-12 md:col-span-4">
     <svelte:fragment slot="label">Day change</svelte:fragment>
-    <div class:text-red-600={$isDayLoss} class:text-green-600={!$isDayLoss} slot="value">
+    <ColoredGainLossStat amount={$dayGain} slot="value">
       <CurrencyAmountFormatter amount={$dayGain} />
       /
       <CurrencyAmountFormatter amount={$dayGainAud} />
       ({$dayGainPercentage})
-    </div>
+    </ColoredGainLossStat>
   </StatsCard>
 </div>
 

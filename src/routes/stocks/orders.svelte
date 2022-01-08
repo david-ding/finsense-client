@@ -11,12 +11,10 @@
   };
 </script>
 
-<h2 class="flex items-center">
-  Orders
-  <Button class="btn-secondary-outline px-2 ml-4" on:click={handleCreateOrderClick}>
-    <PlusIcon />
-  </Button>
-</h2>
+<h2>Orders</h2>
+<Button class="btn-phantom sm:absolute sm:top-8 sm:right-4" on:click={handleCreateOrderClick}>
+  <PlusIcon />
+</Button>
 
 <OrderModal />
 <OrdersList class="mt-4" />

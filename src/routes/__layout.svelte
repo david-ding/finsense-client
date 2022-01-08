@@ -1,29 +1,25 @@
 <script lang="ts">
   import "../app.postcss";
-  import Sidebar from "../lib/components/site/Sidebar.svelte";
+
+  import Header from "$lib/components/site/Header.svelte";
   import type { MenuItem } from "../lib/entities/menu-item";
 
   const menuItems: Array<MenuItem> = [
     {
-      label: "Stocks",
-      subItems: [
-        {
-          label: "Holdings",
-          path: "/stocks/holdings",
-        },
-        {
-          label: "Orders",
-          path: "/stocks/orders",
-        },
-      ],
+      label: "Dashboard",
+      path: "/dashboard",
+    },
+    {
+      label: "Orders",
+      path: "/stocks/orders",
     },
   ];
 </script>
 
-<div class="w-64 bg-primary text-white fixed h-screen overflow-y-auto">
-  <Sidebar {menuItems} />
-</div>
+<Header {menuItems} />
 
-<main class="ml-64 p-4 bg-gray-100 h-screen overflow-y-auto">
-  <slot />
+<main class="flex justify-center">
+  <div class="w-screen max-w-full sm:max-w-screen-sm lg:max-w-screen-lg px-4 py-8 relative">
+    <slot />
+  </div>
 </main>

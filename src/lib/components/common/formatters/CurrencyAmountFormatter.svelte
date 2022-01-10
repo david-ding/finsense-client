@@ -3,7 +3,7 @@
   import { BehaviorSubject, combineLatest } from "rxjs";
   import { map } from "rxjs/operators";
   import { getContext } from "svelte";
-  import type { Readable } from "svelte/store";
+  import { readable, Readable } from "svelte/store";
 
   import type { CurrencyAmount } from "../../../entities/currency-amount";
   import { usdAudRate } from "../../../stores/features/exchange-rates/exchange-rates.derived-stores";
@@ -16,7 +16,7 @@
   const sourceAmount = new BehaviorSubject(amount);
   $: sourceAmount.next(amount);
 
-  const targetCurrencyCode = getContext<Readable<string>>("targetCurrencyCode");
+  const targetCurrencyCode = getContext<Readable<string>>("targetCurrencyCode") || readable<string>("USD");
   const targetAmount = combineLatest([
     observe(targetCurrencyCode),
     sourceAmount.asObservable(),

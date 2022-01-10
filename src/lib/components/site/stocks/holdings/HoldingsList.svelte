@@ -56,6 +56,7 @@
   import { holdingsApiEndpoints } from "../../../../stores/features/holdings/holdings.api";
   import {
     holdings,
+    isLoading,
     totalMarketValue,
   } from "../../../../stores/features/holdings/holdings.derived-stores";
   import { dispatch } from "../../../../stores/redux-store";
@@ -85,6 +86,7 @@
 <Table
   class={classNames}
   {columns}
+  isLoading={$isLoading}
   rows={$holdingsListItems}
   rowIdentifier={(holding) => holding.symbol}
 >

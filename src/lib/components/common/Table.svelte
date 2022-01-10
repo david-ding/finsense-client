@@ -16,6 +16,7 @@
   let classNames: ClassNames = null;
   export { classNames as class };
   export let columns: Array<TableColumn>;
+  export let isLoading: boolean = false;
   export let rows: Array<T>;
   export let rowIdentifier: (row: T) => unknown = (row) => row.id;
 </script>
@@ -42,27 +43,44 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
-            {#if !rows.length}
-              <tr>
-                <td colspan={columns.length} class="px-4 py-2 whitespace-nowrap text-sm">
-                  No data to display
-                </td>
-              </tr>
+            {#if isLoading}
+              {#each Array(3) as _i}
+                <tr>
+                  {#each columns as _column}
+                    <td class="px-4 py-2 whitespace-nowrap text-sm">
+                      <div class="animate-pulse bg-gray-500">&nbsp;</div>
+                    </td>
+                  {/each}
+                  {#if $$slots.actions}
+                    <td class="px-4 py-2 whitespace-nowrap text-right text-sm font-medium">
+                      <div class="animate-pulse bg-gray-500">&nbsp;</div>
+                    </td>
+                  {/if}
+                </tr>
+              {/each}
+            {:else}
+              {#if !rows.length}
+                <tr>
+                  <td colspan={columns.length} class="px-4 py-2 whitespace-nowrap text-sm">
+                    No data to display
+                  </td>
+                </tr>
+              {/if}
+              {#each rows as row (rowIdentifier(row))}
+                <tr>
+                  {#each columns as column}
+                    <td class="px-4 py-2 whitespace-nowrap text-sm">
+                      <slot name="cell" {column} {row} />
+                    </td>
+                  {/each}
+                  {#if $$slots.actions}
+                    <td class="px-4 py-2 whitespace-nowrap text-right text-sm font-medium">
+                      <slot name="actions" {row} />
+                    </td>
+                  {/if}
+                </tr>
+              {/each}
             {/if}
-            {#each rows as row (rowIdentifier(row))}
-              <tr>
-                {#each columns as column}
-                  <td class="px-4 py-2 whitespace-nowrap text-sm">
-                    <slot name="cell" {column} {row} />
-                  </td>
-                {/each}
-                {#if $$slots.actions}
-                  <td class="px-4 py-2 whitespace-nowrap text-right text-sm font-medium">
-                    <slot name="actions" {row} />
-                  </td>
-                {/if}
-              </tr>
-            {/each}
           </tbody>
         </table>
       </div>

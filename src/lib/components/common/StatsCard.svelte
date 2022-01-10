@@ -3,6 +3,7 @@
   import mergeClassNames from "../../utils/merge-class-names";
   import Card from "./Card.svelte";
 
+  export let isLoading: boolean = true;
   let classNames: ClassNames = null;
 
   export { classNames as class };
@@ -19,5 +20,9 @@
   ])}
 >
   <div class="text-xs text-gray-400"><slot name="label" /></div>
-  <div class="font-bold"><slot name="value" /></div>
+  {#if isLoading}
+    <div class="animate-pulse bg-gray-500 w-24 leading-4 my-1">&nbsp;</div>
+  {:else}
+    <div class="font-bold"><slot name="value" /></div>
+  {/if}
 </Card>

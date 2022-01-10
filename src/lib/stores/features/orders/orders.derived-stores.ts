@@ -7,6 +7,8 @@ export const ordersStore = derived(rootStore<RootState>(), ($rootStore) => $root
 
 export const orders = derived(ordersStore, ($ordersStore) => orderBy($ordersStore.entities, "date", "desc"));
 
+export const isLoading = derived(ordersStore, ($ordersStore) => $ordersStore.isLoading);
+
 export const validationErrors = derived(
   ordersStore,
   ($ordersStore) => $ordersStore.validationErrors,

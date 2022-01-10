@@ -14,6 +14,7 @@
     gain,
     gainPercentage,
     isLiveMode,
+    isLoading as holdingsIsLoading,
     totalMarketValue,
   } from "$lib/stores/features/holdings/holdings.derived-stores";
   import { holdingsActions } from "$lib/stores/features/holdings/holdings.store";
@@ -24,7 +25,7 @@
     disconnectFinnhubLiveQuotes,
   } from "$lib/streams/finnhub.stream";
   import ColoredGainLossStat from "$lib/components/common/ColoredGainLossStat.svelte";
-  import { usdAudRate } from "$lib/stores/features/exchange-rates/exchange-rates.derived-stores";
+  import { usdAudRate, isLoading as exchangeRatesIsLoading } from "$lib/stores/features/exchange-rates/exchange-rates.derived-stores";
   import { formatDate } from "$lib/utils/date.utils";
   import { targetCurrencyCode } from "$lib/stores/features/dashboard/dashboard.derived-stores";
 
@@ -74,27 +75,27 @@
 </div>
 
 <div class="mt-4 grid grid-cols-12 gap-4">
-  <StatsCard class="col-span-12 lg:col-span-3">
+  <StatsCard class="col-span-12 lg:col-span-3" isLoading={$holdingsIsLoading}>
     <svelte:fragment slot="label">Market Value</svelte:fragment>
     <svelte:fragment slot="value">
       <CurrencyAmountFormatter amount={$totalMarketValue} />
     </svelte:fragment>
   </StatsCard>
-  <StatsCard class="col-span-12 lg:col-span-3">
+  <StatsCard class="col-span-12 lg:col-span-3" isLoading={$holdingsIsLoading}>
     <svelte:fragment slot="label">Gain/Loss</svelte:fragment>
     <ColoredGainLossStat amount={$gain} slot="value">
       <CurrencyAmountFormatter amount={$gain} />
       ({$gainPercentage})
     </ColoredGainLossStat>
   </StatsCard>
-  <StatsCard class="col-span-12 lg:col-span-3">
+  <StatsCard class="col-span-12 lg:col-span-3" isLoading={$holdingsIsLoading}>
     <svelte:fragment slot="label">Day Change</svelte:fragment>
     <ColoredGainLossStat amount={$dayGain} slot="value">
       <CurrencyAmountFormatter amount={$dayGain} />
       ({$dayGainPercentage})
     </ColoredGainLossStat>
   </StatsCard>
-  <StatsCard class="col-span-12 lg:col-span-3">
+  <StatsCard class="col-span-12 lg:col-span-3" isLoading={$exchangeRatesIsLoading}>
     <svelte:fragment slot="label">
       USD/AUD ({formatDate($usdAudRate?.updatedAt)})
     </svelte:fragment>

@@ -16,6 +16,8 @@ export const holdings = derived(holdingsStore, ($holdingsStore) =>
 
 export const isLiveMode = derived(holdingsStore, ($holdingsStore) => $holdingsStore.isLiveMode);
 
+export const isLoading = derived(holdingsStore, ($holdingsStore) => $holdingsStore.isLoading);
+
 export const symbols = derived(holdingsStore, ($holdingsStore) => $holdingsStore.ids);
 
 export const totalCost = derived(holdings, ($holdings) =>

@@ -3,7 +3,7 @@
   import type { ClassNames } from "../../../../entities/class-names";
   import type { Order } from "../../../../entities/order";
   import { ordersApiEndpoints } from "../../../../stores/features/orders/orders.api";
-  import { orders } from "../../../../stores/features/orders/orders.derived-stores";
+  import { isLoading, orders } from "../../../../stores/features/orders/orders.derived-stores";
   import { ordersActions } from "../../../../stores/features/orders/orders.store";
   import { dispatch } from "../../../../stores/redux-store";
   import Badge from "../../../common/Badge.svelte";
@@ -42,17 +42,19 @@
   }
 </script>
 
-<Table class={classNames} {columns} rows={$orders}>
+<Table class={classNames} {columns} isLoading={$isLoading} rows={$orders}>
   <div slot="cell" let:column let:row>
     {#if column.prop === "price"}
       <CurrencyAmountFormatter amount={row[column.prop]} />
     {:else if column.prop === "date"}
       <DateTimeFormatter value={row.date} />
     {:else if column.prop === "type"}
-      <Badge class={{
-        "bg-green-100 text-green-800": row.type === "buy",
-        "bg-red-100 text-red-800": row.type === "sell",
-      }}>
+      <Badge
+        class={{
+          "bg-green-100 text-green-800": row.type === "buy",
+          "bg-red-100 text-red-800": row.type === "sell",
+        }}
+      >
         {row.type.toUpperCase()}
       </Badge>
     {:else}
@@ -61,12 +63,8 @@
   </div>
 
   <div slot="actions" let:row>
-    <Link on:click={() => editOrder(row.id)}>
-      Edit
-    </Link>
-    <Link class="text-red-500 ml-4" on:click={() => deleteOrder(row)}>
-      Delete
-    </Link>
+    <Link on:click={() => editOrder(row.id)}>Edit</Link>
+    <Link class="text-red-500 ml-4" on:click={() => deleteOrder(row)}>Delete</Link>
   </div>
 </Table>
 

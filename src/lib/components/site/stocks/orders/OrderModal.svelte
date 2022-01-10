@@ -47,7 +47,7 @@
             ),
           ) : {};
 
-        modal.open();
+        modal?.open();
       });
   });
 </script>

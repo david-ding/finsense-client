@@ -1,8 +1,8 @@
 <script lang="ts">
   import "../app.postcss";
+  import type { MenuItem } from "$lib/entities/menu-item";
 
   import Header from "$lib/components/site/Header.svelte";
-  import type { MenuItem } from "../lib/entities/menu-item";
 
   const menuItems: Array<MenuItem> = [
     {

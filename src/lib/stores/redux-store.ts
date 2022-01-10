@@ -7,6 +7,7 @@ import { exchangeRatesApi } from "./features/exchange-rates/exchange-rates.api";
 import exchangeRatesReducer from "./features/exchange-rates/exchange-rates.store";
 import { holdingsApi } from "./features/holdings/holdings.api";
 import holdingsReducer from "./features/holdings/holdings.store";
+import dashboardReducer from "./features/dashboard/dashboard.store";
 
 const reduxStore = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const reduxStore = configureStore({
     [exchangeRatesApi.reducerPath]: exchangeRatesApi.reducer,
     holdings: holdingsReducer,
     [holdingsApi.reducerPath]: holdingsApi.reducer,
+    dashboard: dashboardReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()

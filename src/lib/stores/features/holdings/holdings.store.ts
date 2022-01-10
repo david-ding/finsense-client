@@ -24,7 +24,7 @@ const holdingsSlice = createSlice({
   name: "holdings",
   initialState,
   reducers: {
-    toggleLiveMode: (state, { payload: isLiveMode }) => {
+    setLiveMode: (state, { payload: isLiveMode }) => {
       state.isLiveMode = isLiveMode;
     },
     updateLiveQuote: (state, { payload }) => {

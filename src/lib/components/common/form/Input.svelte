@@ -1,5 +1,5 @@
 <script lang="ts">
-  import mergeClassNames from "../../../utils/merge-class-names";
+  import mergeClassNames from "$lib/utils/merge-class-names";
   import { imask } from "@imask/svelte";
   import { createEventDispatcher, getContext } from "svelte";
   import type { Observable } from "rxjs";
@@ -11,7 +11,7 @@
   export let name: string = null;
   export let placeholder: string = null;
   export let prefix: string = null;
-  export let type: "text" | "number" | "date" = "text";
+  export let type: "text" | "number" | "date" | "password" = "text";
   export let value: string | number = null;
 
   const dispatch = createEventDispatcher();

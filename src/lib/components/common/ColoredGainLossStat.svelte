@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { CurrencyAmount } from "../../entities/currency-amount";
-  import { isNegative, isPositive } from "../../utils/currency-amount.utils";
+  import type { CurrencyAmount } from "$lib/entities/currency-amount";
+  import { isNegative, isPositive } from "$lib/utils/currency-amount.utils";
 
   export let amount: CurrencyAmount;
 </script>

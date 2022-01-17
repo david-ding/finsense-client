@@ -1,6 +1,6 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import Lazy from "./Lazy.svelte";
+  import Lazy from "$lib/components/common/Lazy.svelte";
 
   let shouldRender: boolean = false;
 
@@ -13,7 +13,7 @@
   export function close(): void {
     shouldRender = false;
     dispatch("close");
-  };
+  }
 </script>
 
 <Lazy componentResolver={() => import("./_internal/Modal.svelte")} {shouldRender}>

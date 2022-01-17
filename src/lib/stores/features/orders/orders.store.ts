@@ -1,7 +1,7 @@
 import { createEntityAdapter, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import type { EntityState } from "@reduxjs/toolkit";
-import type { Order } from "../../../entities/order";
-import { ordersApiEndpoints } from "./orders.api";
+import type { Order } from "$lib/entities/order";
+import { ordersApiEndpoints } from "$lib/stores/features/orders/orders.api";
 
 export type OrderState = {
   orderModalDisplayed: { id: string };

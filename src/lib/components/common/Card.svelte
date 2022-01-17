@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { ClassNames } from "../../entities/class-names";
-  import mergeClassNames from "../../utils/merge-class-names";
+  import type { ClassNames } from "$lib/entities/class-names";
+  import mergeClassNames from "$lib/utils/merge-class-names";
 
   let classNames: ClassNames = null;
 

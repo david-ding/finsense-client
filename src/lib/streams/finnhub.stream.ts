@@ -1,12 +1,12 @@
 import { isEmpty, negate } from "lodash-es";
 import { lastValueFrom, Subject, Subscription } from "rxjs";
 import { filter, take, throttleTime } from "rxjs/operators";
-import type { Holding } from "../entities/holding";
-import { symbols } from "../stores/features/holdings/holdings.derived-stores";
-import { holdingsActions } from "../stores/features/holdings/holdings.store";
-import { dispatch } from "../stores/redux-store";
-import { createCurrencyAmount } from "../utils/currency-amount.utils";
-import { observe } from "../utils/store.utils";
+import type { Holding } from "$lib/entities/holding";
+import { symbols } from "$lib/stores/features/holdings/holdings.derived-stores";
+import { holdingsActions } from "$lib/stores/features/holdings/holdings.store";
+import { dispatch } from "$lib/stores/redux-store";
+import { createCurrencyAmount } from "$lib/utils/currency-amount.utils";
+import { observe } from "$lib/utils/store.utils";
 
 let socket: WebSocket;
 const liveQuote$Map: Record<string, Subject<Partial<Holding>>> = {};
@@ -59,10 +59,13 @@ const connectFinnhubLiveQuotes = async (): Promise<WebSocket> => {
 };
 
 const disconnectFinnhubLiveQuotes = (): void => {
-  socket?.close();
+  if (!socket) {
+    return;
+  }
+  socket.close();
   socket = null;
 
-  subscriptions.forEach(subscription => subscription.unsubscribe());
+  subscriptions.forEach(subscription => subscription?.unsubscribe());
   console.debug("disconnected");
 };
 

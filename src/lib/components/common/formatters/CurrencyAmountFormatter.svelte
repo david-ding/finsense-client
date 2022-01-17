@@ -5,10 +5,10 @@
   import { getContext } from "svelte";
   import { readable, Readable } from "svelte/store";
 
-  import type { CurrencyAmount } from "../../../entities/currency-amount";
-  import { usdAudRate } from "../../../stores/features/exchange-rates/exchange-rates.derived-stores";
-  import { convertToForeign, isNegative } from "../../../utils/currency-amount.utils";
-  import { observe } from "../../../utils/store.utils";
+  import type { CurrencyAmount } from "$lib/entities/currency-amount";
+  import { usdAudRate } from "$lib/stores/features/exchange-rates/exchange-rates.derived-stores";
+  import { convertToForeign, isNegative } from "$lib/utils/currency-amount.utils";
+  import { observe } from "$lib/utils/store.utils";
   import Number from "./NumberFormatter.svelte";
 
   export let amount: CurrencyAmount;

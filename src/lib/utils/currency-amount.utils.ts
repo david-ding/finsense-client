@@ -1,4 +1,4 @@
-import type { CurrencyAmount } from "../entities/currency-amount";
+import type { CurrencyAmount } from "$lib/entities/currency-amount";
 
 export const zero = (code?: string): CurrencyAmount => ({
   code,

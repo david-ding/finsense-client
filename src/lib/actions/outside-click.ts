@@ -1,4 +1,4 @@
-import type { SvelteAction } from "../entities/svelte-action";
+import type { SvelteAction } from "$lib/entities/svelte-action";
 
 const IGNORED_SELECTORS = [
   ".bui-select-dropdown", // hack to ignore dropdown clicks

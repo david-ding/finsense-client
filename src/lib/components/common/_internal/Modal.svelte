@@ -1,9 +1,9 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import Button from "../Button.svelte";
-  import CrossIcon from "../icons/CrossIcon.svelte";
-  import Link from "../Link.svelte";
-  import clickOutside from "../../../actions/outside-click";
+  import Button from "$lib/components/common/Button.svelte";
+  import CrossIcon from "$lib/components/common/icons/CrossIcon.svelte";
+  import Link from "$lib/components/common/Link.svelte";
+  import clickOutside from "$lib/actions/outside-click";
 
   export let showCloseIcon = true;
 

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { CurrencyAmount } from "../../../entities/currency-amount";
-  import { createCurrencyAmount } from "../../../utils/currency-amount.utils";
+  import type { CurrencyAmount } from "$lib/entities/currency-amount";
+  import { createCurrencyAmount } from "$lib/utils/currency-amount.utils";
   import Input from "./Input.svelte";
 
   export let currencyCode: string = "AUD";

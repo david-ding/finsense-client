@@ -1,12 +1,12 @@
 import { derived } from "svelte/store";
-import type { RootState } from "../../root-state";
-import { rootStore } from "../../root-store";
+import type { RootState } from "$lib/stores/root-state";
+import { rootStore } from "$lib/stores/root-store";
 import {
   add,
   multiply,
   percentageOf,
   subtract,
-} from "../../../utils/currency-amount.utils";
+} from "$lib/utils/currency-amount.utils";
 
 export const holdingsStore = derived(rootStore<RootState>(), ($rootStore) => $rootStore.holdings);
 

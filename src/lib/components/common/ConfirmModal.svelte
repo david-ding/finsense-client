@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Button from "./Button.svelte";
-  import Modal from "./Modal.svelte";
+  import Button from "$lib/components/common/Button.svelte";
+  import Modal from "$lib/components/common/Modal.svelte";
 
   type T = $$Generic;
   let modal: Modal;

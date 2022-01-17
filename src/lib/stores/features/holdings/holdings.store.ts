@@ -1,7 +1,7 @@
 import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import type { EntityState } from "@reduxjs/toolkit";
-import type { Holding } from "../../../entities/holding";
-import { holdingsApiEndpoints } from "./holdings.api";
+import type { Holding } from "$lib/entities/holding";
+import { holdingsApiEndpoints } from "$lib/stores/features/holdings/holdings.api";
 
 export type HoldingsState = {
   isLiveMode: boolean;

@@ -1,4 +1,4 @@
-import type { ClassNames } from "../entities/class-names";
+import type { ClassNames } from "$lib/entities/class-names";
 
 const mergeClassNamesObj = (classNamesArray: Array<ClassNames>): ClassNames => {
   return classNamesArray

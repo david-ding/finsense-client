@@ -7,6 +7,6 @@
     stroke-linecap="round"
     stroke-linejoin="round"
     stroke-width="2"
-    d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+    d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
   />
 </Svg>

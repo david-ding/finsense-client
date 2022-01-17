@@ -4,17 +4,17 @@
   import { onMount } from "svelte";
   import { cloneDeep } from "lodash-es";
 
-  import type { Order } from "../../../../entities/order";
-  import { ordersApiEndpoints } from "../../../../stores/features/orders/orders.api";
+  import type { Order } from "$lib/entities/order";
+  import { ordersApiEndpoints } from "$lib/stores/features/orders/orders.api";
   import {
     orderModalDisplayed,
     orders,
-  } from "../../../../stores/features/orders/orders.derived-stores";
-  import { ordersActions } from "../../../../stores/features/orders/orders.store";
-  import { dispatch } from "../../../../stores/redux-store";
-  import { observe } from "../../../../utils/store.utils";
-  import Button from "../../../common/Button.svelte";
-  import Modal from "../../../common/Modal.svelte";
+  } from "$lib/stores/features/orders/orders.derived-stores";
+  import { ordersActions } from "$lib/stores/features/orders/orders.store";
+  import { dispatch } from "$lib/stores/redux-store";
+  import { observe } from "$lib/utils/store.utils";
+  import Button from "$lib/components/common/Button.svelte";
+  import Modal from "$lib/components/common/Modal.svelte";
   import OrderForm from "./OrderForm.svelte";
 
   let modal: Modal;

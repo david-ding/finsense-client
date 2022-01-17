@@ -3,8 +3,8 @@
   import PlusIcon from "$lib/components/common/icons/PlusIcon.svelte";
   import OrderModal from "$lib/components/site/stocks/orders/OrderModal.svelte";
   import OrdersList from "$lib/components/site/stocks/orders/OrdersList.svelte";
-  import { ordersActions } from "../../lib/stores/features/orders/orders.store";
-  import { dispatch } from "../../lib/stores/redux-store";
+  import { ordersActions } from "$lib/stores/features/orders/orders.store";
+  import { dispatch } from "$lib/stores/redux-store";
 
   const handleCreateOrderClick = () => {
     dispatch(ordersActions.showOrderModal(null));

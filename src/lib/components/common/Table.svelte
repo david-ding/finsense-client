@@ -7,9 +7,9 @@
 
 <script lang="ts">
   import { upperCase } from "lodash-es";
-  import type { ClassNames } from "../../entities/class-names";
-  import type { Identifiable } from "../../entities/identifiable";
-  import mergeClassNames from "../../utils/merge-class-names";
+  import type { ClassNames } from "$lib/entities/class-names";
+  import type { Identifiable } from "$lib/entities/identifiable";
+  import mergeClassNames from "$lib/utils/merge-class-names";
 
   type T = $$Generic<Identifiable>;
 

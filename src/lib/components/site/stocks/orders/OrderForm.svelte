@@ -1,18 +1,18 @@
 <script lang="ts">
   import { setContext } from "svelte";
   import type { SelectOption } from "svelte-selectable";
-  import type { Order, OrderType } from "../../../../entities/order";
-  import { validationErrors } from "../../../../stores/features/orders/orders.derived-stores";
-  import { stockSymbolsApiEndpoints } from "../../../../stores/features/stock-symbols/stock-symbols.api";
-  import { stockSymbolOptions } from "../../../../stores/features/stock-symbols/stock-symbols.derived-stores";
-  import { stockSymbolsActions } from "../../../../stores/features/stock-symbols/stock-symbols.store";
-  import { dispatch } from "../../../../stores/redux-store";
-  import CurrencyInput from "../../../common/form/CurrencyInput.svelte";
-  import DateInput from "../../../common/form/DateInput.svelte";
-  import FormField from "../../../common/form/FormField.svelte";
-  import Input from "../../../common/form/Input.svelte";
-  import Select from "../../../common/form/Select.svelte";
-  import Typeahead from "../../../common/form/Typeahead.svelte";
+  import type { Order, OrderType } from "$lib/entities/order";
+  import { validationErrors } from "$lib/stores/features/orders/orders.derived-stores";
+  import { stockSymbolsApiEndpoints } from "$lib/stores/features/stock-symbols/stock-symbols.api";
+  import { stockSymbolOptions } from "$lib/stores/features/stock-symbols/stock-symbols.derived-stores";
+  import { stockSymbolsActions } from "$lib/stores/features/stock-symbols/stock-symbols.store";
+  import { dispatch } from "$lib/stores/redux-store";
+  import CurrencyInput from "$lib/components/common/form/CurrencyInput.svelte";
+  import DateInput from "$lib/components/common/form/DateInput.svelte";
+  import FormField from "$lib/components/common/form/FormField.svelte";
+  import Input from "$lib/components/common/form/Input.svelte";
+  import Select from "$lib/components/common/form/Select.svelte";
+  import Typeahead from "$lib/components/common/form/Typeahead.svelte";
 
   const ORDER_TYPE_OPTIONS: Array<SelectOption> = [
     { value: "buy", label: "Buy" },

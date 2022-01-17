@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { StockSymbol } from "../../../entities/stock-symbol";
-import { stockSymbolsApiEndpoints } from "./stock-symbols.api";
+import type { StockSymbol } from "$lib/entities/stock-symbol";
+import { stockSymbolsApiEndpoints } from "$lib/stores/features/stock-symbols/stock-symbols.api";
 
 export type StockSymbolState = {
   entities: Array<StockSymbol>;

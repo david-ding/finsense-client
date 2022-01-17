@@ -1,5 +1,5 @@
 import type { Readable } from "svelte/store";
-import reduxStore from "./redux-store";
+import reduxStore from "$lib/stores/redux-store";
 
 export function rootStore<T>(): Readable<T> {
   // eslint-disable-next-line @typescript-eslint/ban-types

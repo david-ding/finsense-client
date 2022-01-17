@@ -2,53 +2,93 @@
   import { page } from "$app/stores";
   import { expoOut } from "svelte/easing";
   import { slide } from "svelte/transition";
-  import type { MenuItem } from "../../entities/menu-item";
-  import mergeClassNames from "../../utils/merge-class-names";
-  import Button from "../common/Button.svelte";
-  import CrossIcon from "../common/icons/CrossIcon.svelte";
-  import MenuIcon from "../common/icons/MenuIcon.svelte";
+  import type { MenuItem } from "$lib/entities/menu-item";
+  import mergeClassNames from "$lib/utils/merge-class-names";
+  import Button from "$lib/components/common/Button.svelte";
+  import CrossIcon from "$lib/components/common/icons/CrossIcon.svelte";
+  import MenuIcon from "$lib/components/common/icons/MenuIcon.svelte";
 
   let mobileMenuExpanded: boolean;
+  let userMenuExpanded: boolean;
+
   export let menuItems: Array<MenuItem> = [];
+  export let userMenuItems: Array<MenuItem> = [];
 
   function toggleMobileMenuExpanded() {
     mobileMenuExpanded = !mobileMenuExpanded;
+  }
+
+  function toggleUserMenuExpanded() {
+    userMenuExpanded = !userMenuExpanded;
   }
 </script>
 
 <nav class="bg-gray-800">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
-      <div class="flex items-center">
-        <div class="flex-shrink-0">
-          <img
-            class="h-8 w-8"
-            src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-            alt="Workflow"
-          />
-        </div>
-        <div class="hidden md:block">
-          <div class="ml-10 flex items-baseline space-x-4">
-            {#each menuItems as menuItem}
-              <a
-                href={menuItem.path}
-                class={mergeClassNames([
-                  "px-3",
-                  "py-2",
-                  "rounded-md",
-                  "text-sm",
-                  "font-medium",
-                  {
-                    "text-gray-300 hover:bg-gray-700 hover:text-white":
-                      menuItem.path !== $page.path,
-                  },
-                  { "bg-gray-900 text-white": menuItem.path === $page.path },
-                ])}
-              >
-                {menuItem.label}
-              </a>
-            {/each}
+      <div class="w-full flex justify-between">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <img
+              class="h-8 w-8"
+              src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+              alt="Workflow"
+            />
           </div>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-4">
+              {#each menuItems as menuItem}
+                <a
+                  href={menuItem.path}
+                  class={mergeClassNames([
+                    "px-3",
+                    "py-2",
+                    "rounded-md",
+                    "text-sm",
+                    "font-medium",
+                    {
+                      "text-gray-300 hover:bg-gray-700 hover:text-white":
+                        menuItem.path !== $page.url.pathname,
+                    },
+                    { "bg-gray-900 text-white": menuItem.path === $page.url.pathname },
+                  ])}
+                >
+                  {menuItem.label}
+                </a>
+              {/each}
+            </div>
+          </div>
+        </div>
+
+        <div class="md:relative">
+          <Button
+            class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+            on:click={toggleUserMenuExpanded}
+          >
+            <img
+              class="h-8 w-8 rounded-full"
+              src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=256&h=256&q=80"
+              alt=""
+            />
+          </Button>
+          {#if userMenuExpanded}
+            <div
+              class="origin-top-right absolute z-50 right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="user-menu-button"
+              tabindex="-1"
+            >
+              {#each userMenuItems as userMenuItem}
+                <a
+                  href={userMenuItem.path}
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                >
+                  {userMenuItem.label}
+                </a>
+              {/each}
+            </div>
+          {/if}
         </div>
       </div>
       <div class="-mr-2 flex md:hidden">
@@ -73,9 +113,10 @@
               "text-base",
               "font-medium",
               {
-                "text-gray-300 hover:bg-gray-700 hover:text-white": menuItem.path !== $page.path,
+                "text-gray-300 hover:bg-gray-700 hover:text-white":
+                  menuItem.path !== $page.url.pathname,
               },
-              { "bg-gray-900 text-white": menuItem.path === $page.path },
+              { "bg-gray-900 text-white": menuItem.path === $page.url.pathname },
             ])}
           >
             {menuItem.label}

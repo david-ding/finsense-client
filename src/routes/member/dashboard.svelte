@@ -25,7 +25,10 @@
     disconnectFinnhubLiveQuotes,
   } from "$lib/streams/finnhub.stream";
   import ColoredGainLossStat from "$lib/components/common/ColoredGainLossStat.svelte";
-  import { usdAudRate, isLoading as exchangeRatesIsLoading } from "$lib/stores/features/exchange-rates/exchange-rates.derived-stores";
+  import {
+    usdAudRate,
+    isLoading as exchangeRatesIsLoading,
+  } from "$lib/stores/features/exchange-rates/exchange-rates.derived-stores";
   import { formatDate } from "$lib/utils/date.utils";
   import { targetCurrencyCode } from "$lib/stores/features/dashboard/dashboard.derived-stores";
 
@@ -45,33 +48,36 @@
   });
 </script>
 
-<div class="flex justify-between">
+<div class="sm:flex sm:justify-between">
   <h2>Dashboard</h2>
 
   <div class="flex items-center">
     <Button
-      class="btn-phantom leading-4"
-      on:click={() => dispatch(dashboardActions.setTargetCurrencyCode($targetCurrencyCode === "USD" ? "AUD" : "USD"))}
+      class="btn-phantom w-full sm:w-32 leading-4"
+      on:click={() =>
+        dispatch(
+          dashboardActions.setTargetCurrencyCode($targetCurrencyCode === "USD" ? "AUD" : "USD"),
+        )}
     >
       <span class="text-xs">
         <span class="text-xl leading-6">{$targetCurrencyCode}</span>
-         ->
+        ->
         {$targetCurrencyCode === "USD" ? "AUD" : "USD"}
       </span>
     </Button>
 
     <Button
-      class="btn-phantom ml-4"
+      class="btn-phantom ml-4 sm:w-32"
       on:click={() => dispatch(holdingsActions.setLiveMode(!$isLiveMode))}
     >
       {#if $isLiveMode}
-        <OfflineIcon /> <span class="ml-4 animate-ping inline-flex h-1 w-1 rounded-full bg-gray-700" />
+        <OfflineIcon />
+        <span class="ml-4 animate-ping inline-flex h-1 w-1 rounded-full bg-gray-700" />
       {:else}
         <OnlineIcon />
       {/if}
     </Button>
   </div>
-
 </div>
 
 <div class="mt-4 grid grid-cols-12 gap-4">

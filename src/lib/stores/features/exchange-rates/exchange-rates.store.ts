@@ -1,7 +1,7 @@
 import { createEntityAdapter, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import type { EntityState } from "@reduxjs/toolkit";
-import type { ExchangeRate } from "../../../entities/exchange-rate";
-import { exchangeRatesApiEndpoints } from "./exchange-rates.api";
+import type { ExchangeRate } from "$lib/entities/exchange-rate";
+import { exchangeRatesApiEndpoints } from "$lib/stores/features/exchange-rates/exchange-rates.api";
 
 export type ExchangeRatesState = {
   isLoading: boolean;

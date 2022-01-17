@@ -50,21 +50,21 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { derived } from "svelte/store";
-  import type { ClassNames } from "../../../../entities/class-names";
-  import type { CurrencyAmount } from "../../../../entities/currency-amount";
-  import type { Holding } from "../../../../entities/holding";
-  import { holdingsApiEndpoints } from "../../../../stores/features/holdings/holdings.api";
+  import type { ClassNames } from "$lib/entities/class-names";
+  import type { CurrencyAmount } from "$lib/entities/currency-amount";
+  import type { Holding } from "$lib/entities/holding";
+  import { holdingsApiEndpoints } from "$lib/stores/features/holdings/holdings.api";
   import {
     holdings,
     isLoading,
     totalMarketValue,
-  } from "../../../../stores/features/holdings/holdings.derived-stores";
-  import { dispatch } from "../../../../stores/redux-store";
-  import { multiply, subtract, percentageOf } from "../../../../utils/currency-amount.utils";
-  import ColoredGainLossStat from "../../../common/ColoredGainLossStat.svelte";
-  import CurrencyAmountFormatter from "../../../common/formatters/CurrencyAmountFormatter.svelte";
-  import Table, { TableColumn } from "../../../common/Table.svelte";
-  import TrackedNumberic from "../../../common/TrackedNumberic.svelte";
+  } from "$lib/stores/features/holdings/holdings.derived-stores";
+  import { dispatch } from "$lib/stores/redux-store";
+  import { multiply, subtract, percentageOf } from "$lib/utils/currency-amount.utils";
+  import ColoredGainLossStat from "$lib/components/common/ColoredGainLossStat.svelte";
+  import CurrencyAmountFormatter from "$lib/components/common/formatters/CurrencyAmountFormatter.svelte";
+  import Table, { TableColumn } from "$lib/components/common/Table.svelte";
+  import TrackedNumberic from "$lib/components/common/TrackedNumberic.svelte";
 
   let classNames: ClassNames = null;
   export { classNames as class };

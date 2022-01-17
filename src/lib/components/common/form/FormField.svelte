@@ -3,20 +3,20 @@
   import { map } from "rxjs/operators";
   import { getContext, setContext } from "svelte";
   import type { ClassNames } from "svelte-selectable/types";
-  import type { Readable } from "svelte/store";
-  import type { ValidationErrors } from "../../../entities/validation-errors";
-  import mergeClassNames from "../../../utils/merge-class-names";
-  import { observe } from "../../../utils/store.utils";
-  import Tooltip from "../Tooltip.svelte";
+  import { readable, Readable } from "svelte/store";
+  import type { ValidationErrors } from "$lib/entities/validation-errors";
+  import mergeClassNames from "$lib/utils/merge-class-names";
+  import { observe } from "$lib/utils/store.utils";
+  import Tooltip from "$lib/components/common/Tooltip.svelte";
 
   let classNames: ClassNames = null;
   export let name: string;
   export let label: string = null;
   export let htmlId: string = _generateHtmlId();
 
-  const fieldError = observe(getContext<Readable<ValidationErrors>>("errorMessages")).pipe(
-    map((errorMessages) => errorMessages?.[name]),
-  );
+  const errorMessages =
+    getContext<Readable<ValidationErrors>>("errorMessages") || readable<ValidationErrors>(null);
+  const fieldError = observe(errorMessages).pipe(map((errorMessages) => errorMessages?.[name]));
   const invalid = fieldError.pipe(map(negate(isEmpty)));
 
   setContext("invalid", invalid);

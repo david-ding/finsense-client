@@ -1,17 +1,17 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import type { ClassNames } from "../../../../entities/class-names";
-  import type { Order } from "../../../../entities/order";
-  import { ordersApiEndpoints } from "../../../../stores/features/orders/orders.api";
-  import { isLoading, orders } from "../../../../stores/features/orders/orders.derived-stores";
-  import { ordersActions } from "../../../../stores/features/orders/orders.store";
-  import { dispatch } from "../../../../stores/redux-store";
-  import Badge from "../../../common/Badge.svelte";
-  import ConfirmModal from "../../../common/ConfirmModal.svelte";
-  import CurrencyAmountFormatter from "../../../common/formatters/CurrencyAmountFormatter.svelte";
-  import DateTimeFormatter from "../../../common/formatters/DateTimeFormatter.svelte";
-  import Link from "../../../common/Link.svelte";
-  import Table, { TableColumn } from "../../../common/Table.svelte";
+  import type { ClassNames } from "$lib/entities/class-names";
+  import type { Order } from "$lib/entities/order";
+  import { ordersApiEndpoints } from "$lib/stores/features/orders/orders.api";
+  import { isLoading, orders } from "$lib/stores/features/orders/orders.derived-stores";
+  import { ordersActions } from "$lib/stores/features/orders/orders.store";
+  import { dispatch } from "$lib/stores/redux-store";
+  import Badge from "$lib/components/common/Badge.svelte";
+  import ConfirmModal from "$lib/components/common/ConfirmModal.svelte";
+  import CurrencyAmountFormatter from "$lib/components/common/formatters/CurrencyAmountFormatter.svelte";
+  import DateTimeFormatter from "$lib/components/common/formatters/DateTimeFormatter.svelte";
+  import Link from "$lib/components/common/Link.svelte";
+  import Table, { TableColumn } from "$lib/components/common/Table.svelte";
 
   let classNames: ClassNames = null;
   let confirmModal: ConfirmModal<Order>;

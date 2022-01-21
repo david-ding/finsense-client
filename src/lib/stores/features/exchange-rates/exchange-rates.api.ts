@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/index";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/index.js";
 import type { ExchangeRate } from "$lib/entities/exchange-rate";
 import type { RootState } from "$lib/stores/root-state";
 // import { prepareHeadersWithAuth } from "$lib/utils/store.utils";

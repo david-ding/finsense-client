@@ -1,5 +1,5 @@
-import type { BaseQueryFn, FetchArgs } from "@reduxjs/toolkit/dist/query/index";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/index";
+import type { BaseQueryFn, FetchArgs } from "@reduxjs/toolkit/dist/query/index.js";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/index.js";
 import type { Order } from "$lib/entities/order";
 import type { ValidationErrors } from "$lib/entities/validation-errors";
 import type { RootState } from "$lib/stores/root-state";

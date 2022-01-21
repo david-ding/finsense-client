@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { SelectOption } from "svelte-selectable";
+  import type { SelectOption } from "svelte-selectbox";
   import Select from "./Select.svelte";
 
   export let appendTo: string = "main";

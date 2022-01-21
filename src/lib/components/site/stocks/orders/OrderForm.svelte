@@ -1,6 +1,6 @@
 <script lang="ts">
   import { setContext } from "svelte";
-  import type { SelectOption } from "svelte-selectable";
+  import type { SelectOption } from "svelte-selectbox";
   import type { Order, OrderType } from "$lib/entities/order";
   import { validationErrors } from "$lib/stores/features/orders/orders.derived-stores";
   import { stockSymbolsApiEndpoints } from "$lib/stores/features/stock-symbols/stock-symbols.api";

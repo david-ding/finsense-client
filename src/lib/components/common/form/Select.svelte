@@ -2,7 +2,7 @@
   import type { Observable } from "rxjs";
   import { debounce } from "lodash-es";
   import { getContext } from "svelte";
-  import SvelteSelectableSelect, { SelectOption } from "svelte-selectable";
+  import SvelteSelectableSelect, { SelectOption } from "svelte-selectbox";
 
   const invalid = getContext<Observable<boolean>>("invalid");
   const htmlId = getContext<string>("htmlId");

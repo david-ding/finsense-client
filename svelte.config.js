@@ -1,4 +1,4 @@
-import adapter from "@sveltejs/adapter-auto";
+import adapter from '@sveltejs/adapter-netlify';
 import preprocess from "svelte-preprocess";
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -19,13 +19,13 @@ const config = {
     vite: () => ({
       server: {
         open: true,
-        proxy: {
-          "/api": {
-            target: "http://localhost:3333",
-            changeOrigin: true,
-            rewrite: (path) => path.replace(/^\/api/, "/api/v1"),
-          },
-        },
+        // proxy: {
+        //   "/api": {
+        //     target: "http://localhost:3333",
+        //     changeOrigin: true,
+        //     rewrite: (path) => path.replace(/^\/api/, "/api/v1"),
+        //   },
+        // },
       },
     }),
   },

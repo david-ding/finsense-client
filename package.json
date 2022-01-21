@@ -15,8 +15,10 @@
     "@imask/svelte": "^6.2.2",
     "@reduxjs/toolkit": "^1.6.2",
     "@sveltejs/adapter-auto": "next",
+    "@sveltejs/adapter-netlify": "^1.0.0-next.42",
     "@sveltejs/kit": "next",
     "@tailwindcss/forms": "^0.3.4",
+    "@types/cookie": "^0.4.1",
     "@types/lodash-es": "^4.17.5",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
@@ -39,5 +41,9 @@
     "tslib": "^2.3.1",
     "typescript": "^4.4.3"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "cookie": "^0.4.1",
+    "dotenv": "^14.2.0"
+  }
 }

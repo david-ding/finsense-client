@@ -1,7 +1,7 @@
 import type { SvelteAction } from "$lib/entities/svelte-action";
 
 const IGNORED_SELECTORS = [
-  ".bui-select-dropdown", // hack to ignore dropdown clicks
+  ".svelte-selectbox-dropdown", // hack to ignore dropdown clicks
 ];
 
 const clickOutside: SvelteAction<() => void> = (node, callback) => {

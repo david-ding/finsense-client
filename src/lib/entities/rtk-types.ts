@@ -1,4 +1,4 @@
-import type { BaseQueryFn, FetchArgs } from "@reduxjs/toolkit/query";
+import type { BaseQueryFn, FetchArgs } from "@reduxjs/toolkit/dist/query";
 import type { ValidationErrors } from "./validation-errors";
 
 export type Finsense = BaseQueryFn<

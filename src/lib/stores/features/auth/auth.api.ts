@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
-import type { BaseQueryFn, FetchArgs } from "@reduxjs/toolkit/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
+import type { BaseQueryFn, FetchArgs } from "@reduxjs/toolkit/dist/query";
 import type { Credentials, LoginResponse } from "$lib/entities/auth";
 import type { ValidationErrors } from "$lib/entities/validation-errors";
 

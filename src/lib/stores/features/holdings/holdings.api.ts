@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
 import type { Holding } from "$lib/entities/holding";
 import type { RootState } from "$lib/stores/root-state";
 // import { prepareHeadersWithAuth } from "$lib/utils/store.utils";

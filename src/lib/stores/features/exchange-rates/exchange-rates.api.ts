@@ -1,16 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/index.js";
 import type { ExchangeRate } from "$lib/entities/exchange-rate";
-import type { RootState } from "$lib/stores/root-state";
-// import { prepareHeadersWithAuth } from "$lib/utils/store.utils";
-const prepareHeadersWithAuth = (headers, { getState }) => {
-  const token = (getState() as RootState).auth.token;
+import { prepareHeadersWithAuth } from "$lib/utils/auth.utils";
 
-  if (token) {
-    headers.set("authorization", `Bearer ${token}`);
-  }
-
-  return headers;
-};
 export const exchangeRatesApi = createApi({
   reducerPath: "exchangeRatesApi",
   baseQuery: fetchBaseQuery({ baseUrl: "/api", prepareHeaders: prepareHeadersWithAuth }),

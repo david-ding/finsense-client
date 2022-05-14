@@ -33,18 +33,18 @@
   on:clear
   on:reset
   on:select
-  --borderRadius="0.375rem"
-  --lineHeight="1.25rem"
-  --fontSize="0.875rem"
+  --border-radius="0.375rem"
+  --line-height="1.25rem"
+  --font-size="0.875rem"
   --padding="0.5rem 0.75rem 0.5rem 0.75rem"
-  --boxShadow="0 1px 2px 0 rgba(0, 0, 0, 0.05)"
+  --box-shadow="0 1px 2px 0 rgba(0, 0, 0, 0.05)"
   --border={$invalid ? "1px solid #FCA5A5" : "1px solid #d1d5db"}
-  --borderFocused={$invalid ? "1px solid #EF4444" : "1px solid #6366f1"}
-  --borderExpanded="var(--borderFocused)"
-  --borderHover={$invalid ? "1px solid #FCA5A5" : "1px solid #9ca3af"}
-  --boxShadowFocused={$invalid ? "0 0 0 1px #EF4444" : "0 0 0 1px #6366f1"}
-  --dropdownBoxShadow="none"
-  --dropdownItemBackgroundColorHighlighted="#6366f1"
-  --dropdownItemBackgroundColorHover="#e0e7ff"
+  --border-focused={$invalid ? "1px solid #EF4444" : "1px solid #6366f1"}
+  --border-expanded="var(--border-focused)"
+  --border-hover={$invalid ? "1px solid #FCA5A5" : "1px solid #9ca3af"}
+  --box-shadow-focused={$invalid ? "0 0 0 1px #EF4444" : "0 0 0 1px #6366f1"}
+  --dropdown-box-shadow="none"
+  --dropdown-item-background-highlighted="#6366f1"
+  --dropdown-item-background-hover="#e0e7ff"
   --cursor={cursorType}
 />

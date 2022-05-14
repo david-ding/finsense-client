@@ -2,17 +2,8 @@ import type { BaseQueryFn, FetchArgs } from "@reduxjs/toolkit/dist/query/index.j
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/index.js";
 import type { Order } from "$lib/entities/order";
 import type { ValidationErrors } from "$lib/entities/validation-errors";
-import type { RootState } from "$lib/stores/root-state";
-// import { prepareHeadersWithAuth } from "$lib/utils/store.utils";
-const prepareHeadersWithAuth = (headers, { getState }) => {
-  const token = (getState() as RootState).auth.token;
+import { prepareHeadersWithAuth } from "$lib/utils/auth.utils";
 
-  if (token) {
-    headers.set("authorization", `Bearer ${token}`);
-  }
-
-  return headers;
-};
 export const ordersApi = createApi({
   reducerPath: "ordersApi",
   baseQuery: fetchBaseQuery({

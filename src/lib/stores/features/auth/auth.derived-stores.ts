@@ -12,5 +12,3 @@ export const validationErrors = derived(
 );
 
 export const loginFailed = derived(authStore, ($authStore) => $authStore.loginFailed);
-
-export const isAuthenticated = derived(authStore, ($authStore) => !!$authStore.token);

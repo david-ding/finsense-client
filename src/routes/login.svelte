@@ -24,7 +24,8 @@
   async function login() {
     dispatch(authApiEndpoints.login.initiate(credentials));
 
-    onFirstAction("authApi/executeMutation/fulfilled", () => {
+    onFirstAction("authApi/executeMutation/fulfilled", ({ payload: { token }}) => {
+      localStorage.setItem("token", token);
       goto(MEMBER_DASHBOARD);
     });
   }

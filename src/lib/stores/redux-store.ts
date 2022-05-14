@@ -2,7 +2,6 @@ import { configureStore } from "@reduxjs/toolkit";
 import type { Middleware, MiddlewareAPI } from "@reduxjs/toolkit";
 import type { AnyAction } from "redux";
 import { Subject } from "rxjs";
-import { authActions } from "$lib/stores/features/auth/auth.store";
 import { exchangeRatesApi } from "$lib/stores/features/exchange-rates/exchange-rates.api";
 import { holdingsApi } from "$lib/stores/features/holdings/holdings.api";
 import { ordersApi } from "$lib/stores/features/orders/orders.api";
@@ -13,6 +12,7 @@ import ordersReducer from "$lib/stores/features/orders/orders.store";
 import holdingsReducer from "$lib/stores/features/holdings/holdings.store";
 import dashboardReducer from "$lib/stores/features/dashboard/dashboard.store";
 import authReducer from "$lib/stores/features/auth/auth.store";
+import { logout } from "$lib/utils/auth.utils";
 
 const actions = new Subject<AnyAction>();
 
@@ -20,7 +20,7 @@ const unauthenticatedHandlerMiddleware: Middleware = (api: MiddlewareAPI) => {
   return (next) => {
     return (action) => {
       if (action.payload?.status === 401) {
-        api.dispatch(authActions.logout());
+        logout(api.dispatch);
       }
       return next(action);
     };

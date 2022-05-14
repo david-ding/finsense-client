@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { authActions } from "$lib/stores/features/auth/auth.store";
   import { dispatch } from "$lib/stores/redux-store";
+  import { logout } from "$lib/utils/auth.utils";
+  import { onMount } from "svelte";
 
-  dispatch(authActions.logout());
+  onMount(() => logout(dispatch));
 </script>

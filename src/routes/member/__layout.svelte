@@ -1,10 +1,7 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { goto } from "$app/navigation";
   import Header from "$lib/components/site/Header.svelte";
-  import { LOGIN, LOGOUT, MEMBER_DASHBOARD, MEMBER_STOCK_ORDERS } from "$lib/constants/routes";
+  import { LOGOUT, MEMBER_DASHBOARD, MEMBER_STOCK_ORDERS } from "$lib/constants/routes";
   import type { MenuItem } from "$lib/entities/menu-item";
-  import { onFirstAction } from "$lib/utils/on-first-action";
 
   const menuItems: Array<MenuItem> = [
     {
@@ -23,8 +20,6 @@
       path: LOGOUT,
     },
   ];
-
-  onMount(() => onFirstAction("auth/logout", () => goto(LOGIN)));
 </script>
 
 <Header {menuItems} {userMenuItems} />

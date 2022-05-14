@@ -2284,10 +2284,10 @@ svelte-preprocess@^4.0.0, svelte-preprocess@^4.7.4:
     sorcery "^0.10.0"
     strip-indent "^3.0.0"
 
-svelte-selectbox@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/svelte-selectbox/-/svelte-selectbox-0.0.1.tgz#6c42422d88988a15d6f40deff238379e2b72b3f4"
-  integrity sha512-sXevSMKyuiIf781IkAagJNKz8/tpddYZwZLRkOy7FIydEWn9MSWp/GCdQK1/9P7eNaXy+Zss0kGgJwoypA79xQ==
+svelte-selectbox@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/svelte-selectbox/-/svelte-selectbox-0.0.4.tgz#8e948aa64cdb8e9e6ed4c479b232480417b8c0a8"
+  integrity sha512-XCyYlAKeZxJeEa/WVAHWXut4cMGc1bxhvMd3EYidsYr3jc2UzejwM6CZVoGt5HdL3cDAxvsQKq8TrMFED3Ta6w==
 
 svelte@^3.44.0:
   version "3.46.2"

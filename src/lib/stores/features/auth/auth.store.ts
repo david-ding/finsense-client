@@ -3,14 +3,12 @@ import { authApiEndpoints } from "./auth.api";
 
 export type AuthState = {
   isLoading: boolean;
-  token: string;
   validationErrors: Record<string, string>;
   loginFailed: boolean;
 };
 
 const initialState: AuthState = {
   isLoading: false,
-  token: null,
   validationErrors: null,
   loginFailed: false,
 };
@@ -20,9 +18,6 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout: () => initialState,
-    setToken: (state, { payload: token }) => {
-      state.token = token;
-    },
   },
   extraReducers: (builder) => {
     builder.addMatcher(authApiEndpoints.login.matchPending, (state) => {
@@ -32,9 +27,8 @@ const authSlice = createSlice({
     });
     builder.addMatcher(
       authApiEndpoints.login.matchFulfilled,
-      (state: AuthState, { payload: { token } }) => {
+      (state) => {
         state.isLoading = false;
-        state.token = token;
       },
     );
     builder.addMatcher(authApiEndpoints.login.matchRejected, (state, { payload }) => {

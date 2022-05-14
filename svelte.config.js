@@ -19,13 +19,13 @@ const config = {
     vite: () => ({
       server: {
         open: true,
-        // proxy: {
-        //   "/api": {
-        //     target: "http://localhost:3333",
-        //     changeOrigin: true,
-        //     rewrite: (path) => path.replace(/^\/api/, "/api/v1"),
-        //   },
-        // },
+        proxy: {
+          "/api": {
+            target: "http://localhost:3333",
+            changeOrigin: true,
+            rewrite: (path) => path.replace(/^\/api/, "/api/v1"),
+          },
+        },
       },
     }),
   },

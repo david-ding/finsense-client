@@ -7,6 +7,8 @@ export const stockSymbolsStore = derived(
   ($rootStore) => $rootStore.stockSymbols,
 );
 
+export const isLoading = derived(stockSymbolsStore, ($stockSymbolsStore) => $stockSymbolsStore.isLoading);
+
 export const stockSymbols = derived(
   stockSymbolsStore,
   ($stockSymbolsStore) => $stockSymbolsStore.entities,

@@ -10,6 +10,14 @@ export const stockSymbolsApi = createApi({
     search: builder.query<Array<StockSymbol>, string>({
       query: (query) => `/stockSymbols?q=${query}`,
     }),
+    update: builder.mutation<void, void>({
+      query() {
+        return {
+          url: "/stockSymbols/update",
+          method: "POST",
+        };
+      },
+    }),
   }),
 });
 

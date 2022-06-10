@@ -1,6 +1,11 @@
 <script lang="ts">
   import Header from "$lib/components/site/Header.svelte";
-  import { LOGOUT, MEMBER_DASHBOARD, MEMBER_STOCK_ORDERS } from "$lib/constants/routes";
+  import {
+    LOGOUT,
+    MEMBER_DASHBOARD,
+    MEMBER_SETTINGS,
+    MEMBER_STOCK_ORDERS,
+  } from "$lib/constants/routes";
   import type { MenuItem } from "$lib/entities/menu-item";
 
   const menuItems: Array<MenuItem> = [
@@ -11,6 +16,10 @@
     {
       label: "Orders",
       path: MEMBER_STOCK_ORDERS,
+    },
+    {
+      label: "Settings",
+      path: MEMBER_SETTINGS,
     },
   ];
 

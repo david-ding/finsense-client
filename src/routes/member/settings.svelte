@@ -14,7 +14,11 @@
 
 <Card class="px-4 py-2 lg:w-1/3 flex justify-between items-center">
   <div class="text-sm">Update Symbols</div>
-  <Button class="btn btn-primary" disabled={$isLoading} on:click={handleUpdateSymbolsClick}
-    >Update</Button
+  <Button
+    class="btn btn-primary"
+    disabled={$isLoading}
+    on:click={handleUpdateSymbolsClick}
   >
+    Update
+  </Button>
 </Card>

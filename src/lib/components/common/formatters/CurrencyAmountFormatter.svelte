@@ -3,7 +3,8 @@
   import { BehaviorSubject, combineLatest } from "rxjs";
   import { map } from "rxjs/operators";
   import { getContext } from "svelte";
-  import { readable, Readable } from "svelte/store";
+  import { readable } from "svelte/store";
+  import type { Readable } from "svelte/store";
 
   import type { CurrencyAmount } from "$lib/entities/currency-amount";
   import { usdAudRate } from "$lib/stores/features/exchange-rates/exchange-rates.derived-stores";

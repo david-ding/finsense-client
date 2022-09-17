@@ -63,7 +63,8 @@
   import { multiply, subtract, percentageOf } from "$lib/utils/currency-amount.utils";
   import ColoredGainLossStat from "$lib/components/common/ColoredGainLossStat.svelte";
   import CurrencyAmountFormatter from "$lib/components/common/formatters/CurrencyAmountFormatter.svelte";
-  import Table, { TableColumn } from "$lib/components/common/Table.svelte";
+  import Table from "$lib/components/common/Table.svelte";
+  import type { TableColumn } from "$lib/components/common/Table.svelte";
   import TrackedNumberic from "$lib/components/common/TrackedNumberic.svelte";
 
   let classNames: ClassNames = null;

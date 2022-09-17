@@ -3,7 +3,8 @@
   import { map } from "rxjs/operators";
   import { getContext, setContext } from "svelte";
   import type { ClassNames } from "svelte-selectbox/types";
-  import { readable, Readable } from "svelte/store";
+  import { readable } from "svelte/store";
+  import type { Readable } from "svelte/store";
   import type { ValidationErrors } from "$lib/entities/validation-errors";
   import mergeClassNames from "$lib/utils/merge-class-names";
   import { observe } from "$lib/utils/store.utils";

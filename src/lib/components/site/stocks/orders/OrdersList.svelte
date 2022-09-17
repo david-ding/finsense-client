@@ -11,7 +11,8 @@
   import CurrencyAmountFormatter from "$lib/components/common/formatters/CurrencyAmountFormatter.svelte";
   import DateTimeFormatter from "$lib/components/common/formatters/DateTimeFormatter.svelte";
   import Link from "$lib/components/common/Link.svelte";
-  import Table, { TableColumn } from "$lib/components/common/Table.svelte";
+  import Table from "$lib/components/common/Table.svelte";
+  import type { TableColumn } from "$lib/components/common/Table.svelte";
 
   let classNames: ClassNames = null;
   let confirmModal: ConfirmModal<Order>;

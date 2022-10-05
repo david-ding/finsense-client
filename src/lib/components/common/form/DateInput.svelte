@@ -22,4 +22,11 @@
   };
 </script>
 
-<Input {name} on:input={handleInput} type="date" {min} {max} value={inputValue} />
+<Input
+  {name}
+  on:input={handleInput}
+  type="date"
+  {min}
+  {max}
+  value={inputValue}
+/>

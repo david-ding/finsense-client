@@ -6,10 +6,7 @@
 
   import type { Order } from "$lib/entities/order";
   import { ordersApiEndpoints } from "$lib/stores/features/orders/orders.api";
-  import {
-    orderModalDisplayed,
-    orders,
-  } from "$lib/stores/features/orders/orders.derived-stores";
+  import { orderModalDisplayed, orders } from "$lib/stores/features/orders/orders.derived-stores";
   import { ordersActions } from "$lib/stores/features/orders/orders.store";
   import { dispatch } from "$lib/stores/redux-store";
   import { observe } from "$lib/utils/store.utils";
@@ -29,6 +26,15 @@
     dispatch(ordersActions.hideOrderModal()); // sync store state if modal is closed inside Modal component
   }
 
+  async function getOrder(id: string) {
+    return await lastValueFrom(
+      observe(orders).pipe(
+        map((orders) => orders.find((order) => order.id === id)),
+        take(1),
+      ),
+    );
+  }
+
   onMount(() => {
     return observe(orderModalDisplayed)
       .pipe(distinctUntilChanged())
@@ -37,27 +43,29 @@
           return modal?.close();
         }
         const { id } = data;
-        order = id
-          ? cloneDeep(
-            await lastValueFrom(
-              observe(orders).pipe(
-                map((orders) => orders.find((order) => order.id === id)),
-                take(1),
-              ),
-            ),
-          ) : {};
+        order = id ? cloneDeep(await getOrder(id)) : {};
 
         modal?.open();
       });
   });
 </script>
 
-<Modal bind:this={modal} on:close={handleModalClose}>
+<Modal
+  bind:this={modal}
+  on:close={handleModalClose}
+>
   <svelte:fragment slot="title">
     {order.id ? "Update" : "Create"} Order
   </svelte:fragment>
-  <OrderForm slot="body" bind:order />
-  <Button class="btn-primary" slot="actionButtons" on:click={handleSubmit}>
+  <OrderForm
+    slot="body"
+    bind:order
+  />
+  <Button
+    class="btn-primary"
+    slot="actionButtons"
+    on:click={handleSubmit}
+  >
     {order.id ? "Update" : "Create"}
   </Button>
 </Modal>

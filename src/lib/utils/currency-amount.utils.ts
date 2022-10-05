@@ -17,23 +17,17 @@ export const createCurrencyAmount = (value: number | string, code?: string): Cur
 
 export const add = (...amounts: Array<CurrencyAmount>): CurrencyAmount => {
   const code = amounts.find((amount) => !!amount.code)?.code || "AUD";
-  const sumCents = amounts.reduce(
-    (_sum, amount) => _sum + amount.value * 100,
-    0,
-  );
+  const sumCents = amounts.reduce((_sum, amount) => _sum + amount.value * 100, 0);
   return { code, value: sumCents / 100 };
 };
 
 export const subtract = (amount1: CurrencyAmount, amount2: CurrencyAmount): CurrencyAmount => {
   const code = amount1.code || amount2.code || "AUD";
-  const diffCents = (amount1.value * 100) - (amount2.value * 100);
+  const diffCents = amount1.value * 100 - amount2.value * 100;
   return { code, value: diffCents / 100 };
 };
 
-export const multiply = (
-  amount: CurrencyAmount,
-  multiplier: number,
-): CurrencyAmount => {
+export const multiply = (amount: CurrencyAmount, multiplier: number): CurrencyAmount => {
   const { code, value } = amount;
   const newValue = (value * 100 * multiplier) / 100;
 
@@ -52,7 +46,11 @@ export const percentageOf = (amount1: CurrencyAmount, amount2: CurrencyAmount): 
   return `${((amount1.value / amount2.value) * 100).toFixed(2)}%`;
 };
 
-export const convertToForeign = (amount: CurrencyAmount, exchangeRate: number, foreignCurrencyCode: string = "AUD"): CurrencyAmount => ({
+export const convertToForeign = (
+  amount: CurrencyAmount,
+  exchangeRate: number,
+  foreignCurrencyCode: string = "AUD",
+): CurrencyAmount => ({
   ...multiply(amount, exchangeRate),
   code: foreignCurrencyCode,
 });

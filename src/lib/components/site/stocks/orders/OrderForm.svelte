@@ -34,7 +34,11 @@
 </script>
 
 <div class="grid grid-cols-3 gap-4">
-  <FormField class="col-span-2" label="Symbol" name="symbol">
+  <FormField
+    class="col-span-2"
+    label="Symbol"
+    name="symbol"
+  >
     <Typeahead
       appendTo="#modal-frame"
       bind:value={order.symbol}
@@ -45,16 +49,45 @@
       searchFn={(query) => dispatch(stockSymbolsApiEndpoints.search.initiate(query))}
     />
   </FormField>
-  <FormField label="Type" name="type">
-    <Select appendTo="#modal-frame" bind:value={order.type} options={ORDER_TYPE_OPTIONS} />
+  <FormField
+    label="Type"
+    name="type"
+  >
+    <Select
+      appendTo="#modal-frame"
+      bind:value={order.type}
+      options={ORDER_TYPE_OPTIONS}
+    />
   </FormField>
-  <FormField class="col-span-3" label="Date" name="date">
-    <DateInput maxDate={new Date()} bind:value={order.date} />
+  <FormField
+    class="col-span-3"
+    label="Date"
+    name="date"
+  >
+    <DateInput
+      maxDate={new Date()}
+      bind:value={order.date}
+    />
   </FormField>
-  <FormField class="col-span-3 sm:col-span-1" label="Price" name="price">
-    <CurrencyInput bind:value={order.price} {currencyCode} />
+  <FormField
+    class="col-span-3 sm:col-span-1"
+    label="Price"
+    name="price"
+  >
+    <CurrencyInput
+      bind:value={order.price}
+      {currencyCode}
+    />
   </FormField>
-  <FormField class="col-span-3 sm:col-span-1" label="Quantity" name="quantity">
-    <Input type="number" min={0} bind:value={order.quantity} />
+  <FormField
+    class="col-span-3 sm:col-span-1"
+    label="Quantity"
+    name="quantity"
+  >
+    <Input
+      type="number"
+      min={0}
+      bind:value={order.quantity}
+    />
   </FormField>
 </div>

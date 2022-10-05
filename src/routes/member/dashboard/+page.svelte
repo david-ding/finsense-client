@@ -81,27 +81,45 @@
 </div>
 
 <div class="mt-4 grid grid-cols-12 gap-4">
-  <StatsCard class="col-span-12 lg:col-span-3" isLoading={$holdingsIsLoading}>
+  <StatsCard
+    class="col-span-12 lg:col-span-3"
+    isLoading={$holdingsIsLoading}
+  >
     <svelte:fragment slot="label">Market Value</svelte:fragment>
     <svelte:fragment slot="value">
       <CurrencyAmountFormatter amount={$totalMarketValue} />
     </svelte:fragment>
   </StatsCard>
-  <StatsCard class="col-span-12 lg:col-span-3" isLoading={$holdingsIsLoading}>
+  <StatsCard
+    class="col-span-12 lg:col-span-3"
+    isLoading={$holdingsIsLoading}
+  >
     <svelte:fragment slot="label">Gain/Loss</svelte:fragment>
-    <ColoredGainLossStat amount={$gain} slot="value">
+    <ColoredGainLossStat
+      amount={$gain}
+      slot="value"
+    >
       <CurrencyAmountFormatter amount={$gain} />
       ({$gainPercentage})
     </ColoredGainLossStat>
   </StatsCard>
-  <StatsCard class="col-span-12 lg:col-span-3" isLoading={$holdingsIsLoading}>
+  <StatsCard
+    class="col-span-12 lg:col-span-3"
+    isLoading={$holdingsIsLoading}
+  >
     <svelte:fragment slot="label">Day Change</svelte:fragment>
-    <ColoredGainLossStat amount={$dayGain} slot="value">
+    <ColoredGainLossStat
+      amount={$dayGain}
+      slot="value"
+    >
       <CurrencyAmountFormatter amount={$dayGain} />
       ({$dayGainPercentage})
     </ColoredGainLossStat>
   </StatsCard>
-  <StatsCard class="col-span-12 lg:col-span-3" isLoading={$exchangeRatesIsLoading}>
+  <StatsCard
+    class="col-span-12 lg:col-span-3"
+    isLoading={$exchangeRatesIsLoading}
+  >
     <svelte:fragment slot="label">
       USD/AUD ({formatDate($usdAudRate?.updatedAt)})
     </svelte:fragment>

@@ -17,13 +17,16 @@
   const sourceAmount = new BehaviorSubject(amount);
   $: sourceAmount.next(amount);
 
-  const targetCurrencyCode = getContext<Readable<string>>("targetCurrencyCode") || readable<string>("USD");
+  const targetCurrencyCode =
+    getContext<Readable<string>>("targetCurrencyCode") || readable<string>("USD");
   const targetAmount = combineLatest([
     observe(targetCurrencyCode),
     sourceAmount.asObservable(),
   ]).pipe(
     map(([code, sourceAmount]) =>
-      !code || sourceAmount.code === code ? sourceAmount : convertToForeign(sourceAmount, $usdAudRate?.value, code),
+      !code || sourceAmount.code === code
+        ? sourceAmount
+        : convertToForeign(sourceAmount, $usdAudRate?.value, code),
     ),
   );
 </script>

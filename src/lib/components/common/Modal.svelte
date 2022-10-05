@@ -16,9 +16,15 @@
   }
 </script>
 
-<Lazy componentResolver={() => import("./_internal/Modal.svelte")} {shouldRender}>
+<Lazy
+  componentResolver={() => import("./_internal/Modal.svelte")}
+  {shouldRender}
+>
   <svelte:fragment let:Component>
-    <Component {...$$props} on:close={close}>
+    <Component
+      {...$$props}
+      on:close={close}
+    >
       <svelte:fragment slot="title"><slot name="title" /></svelte:fragment>
       <svelte:fragment slot="body"><slot name="body" /></svelte:fragment>
       <svelte:fragment slot="actionButtons"><slot name="actionButtons" /></svelte:fragment>

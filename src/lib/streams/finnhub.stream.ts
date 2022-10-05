@@ -34,12 +34,11 @@ const connectFinnhubLiveQuotes = async (): Promise<WebSocket> => {
       );
       liveQuote$Map[symbol] = new Subject();
       subscriptions.push(
-        liveQuote$Map[symbol].pipe(
-          throttleTime(1000),
-          filter(Boolean),
-        ).subscribe(liveQuoteUpdate => {
-          dispatch(holdingsActions.updateLiveQuote(liveQuoteUpdate));
-        }),
+        liveQuote$Map[symbol]
+          .pipe(throttleTime(1000), filter(Boolean))
+          .subscribe((liveQuoteUpdate) => {
+            dispatch(holdingsActions.updateLiveQuote(liveQuoteUpdate));
+          }),
       );
       console.debug(`Subscribing to ${symbol}`);
     });
@@ -49,10 +48,12 @@ const connectFinnhubLiveQuotes = async (): Promise<WebSocket> => {
     const { data: liveQuotes } = JSON.parse(event.data);
     console.debug(liveQuotes);
 
-    liveQuotes?.forEach(({ s: symbol, p: priceValue }) => liveQuote$Map[symbol].next({
-      symbol,
-      price: createCurrencyAmount(priceValue, "USD"),
-    }));
+    liveQuotes?.forEach(({ s: symbol, p: priceValue }) =>
+      liveQuote$Map[symbol].next({
+        symbol,
+        price: createCurrencyAmount(priceValue, "USD"),
+      }),
+    );
   };
 
   return socket;
@@ -65,7 +66,7 @@ const disconnectFinnhubLiveQuotes = (): void => {
   socket.close();
   socket = null;
 
-  subscriptions.forEach(subscription => subscription?.unsubscribe());
+  subscriptions.forEach((subscription) => subscription?.unsubscribe());
   console.debug("disconnected");
 };
 

@@ -31,7 +31,10 @@
   ];
 </script>
 
-<Header {menuItems} {userMenuItems} />
+<Header
+  {menuItems}
+  {userMenuItems}
+/>
 
 <main class="flex justify-center">
   <div class="w-screen max-w-full sm:max-w-screen-sm lg:max-w-screen-lg px-4 py-8 relative">

@@ -7,7 +7,11 @@
   export let disabled: boolean = false;
 </script>
 
-<button class={mergeClassNames(classNames)} {disabled} on:click>
+<button
+  class={mergeClassNames(classNames)}
+  {disabled}
+  on:click
+>
   <slot name="leftIcon" />
   <slot />
   <slot name="rightIcon" />

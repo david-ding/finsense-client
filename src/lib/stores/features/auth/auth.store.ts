@@ -25,12 +25,9 @@ const authSlice = createSlice({
       state.validationErrors = null;
       state.loginFailed = false;
     });
-    builder.addMatcher(
-      authApiEndpoints.login.matchFulfilled,
-      (state) => {
-        state.isLoading = false;
-      },
-    );
+    builder.addMatcher(authApiEndpoints.login.matchFulfilled, (state) => {
+      state.isLoading = false;
+    });
     builder.addMatcher(authApiEndpoints.login.matchRejected, (state, { payload }) => {
       state.isLoading = false;
       switch (payload.status) {

@@ -12,10 +12,7 @@ export const exchangeRates = derived(
   ($exchangeRatesStore) => $exchangeRatesStore.entities,
 );
 
-export const usdAudRate = derived(
-  exchangeRates,
-  ($exchangeRates) => $exchangeRates["USDAUD"],
-);
+export const usdAudRate = derived(exchangeRates, ($exchangeRates) => $exchangeRates["USDAUD"]);
 
 export const isLoading = derived(
   exchangeRatesStore,

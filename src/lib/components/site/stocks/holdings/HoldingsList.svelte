@@ -1,4 +1,7 @@
-<script lang="ts" context="module">
+<script
+  lang="ts"
+  context="module"
+>
   export type HoldingsListItem = {
     gainLossAmount?: CurrencyAmount;
     gainLossPercent?: string;
@@ -91,7 +94,11 @@
   rows={$holdingsListItems}
   rowIdentifier={(holding) => holding.symbol}
 >
-  <div slot="cell" let:column let:row>
+  <div
+    slot="cell"
+    let:column
+    let:row
+  >
     {#if column.prop === "avgPrice" || column.prop === "marketValue" || column.prop === "price"}
       <TrackedNumberic value={row[column.prop].value}>
         <CurrencyAmountFormatter amount={row[column.prop]} />

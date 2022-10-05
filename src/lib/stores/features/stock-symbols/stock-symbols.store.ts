@@ -12,25 +12,15 @@ const initialState: StockSymbolState = {
   isLoading: false,
 };
 
-const {
-  matchPending: searchMatchPending,
-  matchFulfilled: searchMatchFulfilled,
-} = stockSymbolsApiEndpoints.search;
+const { matchPending: searchMatchPending, matchFulfilled: searchMatchFulfilled } =
+  stockSymbolsApiEndpoints.search;
 
-const {
-  matchPending: updateMatchPending,
-  matchFulfilled: updateMatchFulfilled,
-} = stockSymbolsApiEndpoints.update;
+const { matchPending: updateMatchPending, matchFulfilled: updateMatchFulfilled } =
+  stockSymbolsApiEndpoints.update;
 
-const pendingAction = isAnyOf(
-  searchMatchPending,
-  updateMatchPending,
-);
+const pendingAction = isAnyOf(searchMatchPending, updateMatchPending);
 
-const completedAction = isAnyOf(
-  searchMatchFulfilled,
-  updateMatchFulfilled,
-);
+const completedAction = isAnyOf(searchMatchFulfilled, updateMatchFulfilled);
 
 const stockSymbolsSlice = createSlice({
   name: "stockSymbols",

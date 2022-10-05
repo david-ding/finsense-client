@@ -1,4 +1,7 @@
-<script lang="ts" context="module">
+<script
+  lang="ts"
+  context="module"
+>
   export type TableColumn = {
     name?: string;
     prop?: string;
@@ -38,7 +41,12 @@
               {/each}
 
               {#if $$slots.actions}
-                <th scope="col" class="relative px-4 py-2"> &nbsp; </th>
+                <th
+                  scope="col"
+                  class="relative px-4 py-2"
+                >
+                  &nbsp;
+                </th>
               {/if}
             </tr>
           </thead>
@@ -61,7 +69,10 @@
             {:else}
               {#if !rows.length}
                 <tr>
-                  <td colspan={columns.length} class="px-4 py-2 whitespace-nowrap text-sm">
+                  <td
+                    colspan={columns.length}
+                    class="px-4 py-2 whitespace-nowrap text-sm"
+                  >
                     No data to display
                   </td>
                 </tr>
@@ -70,12 +81,19 @@
                 <tr>
                   {#each columns as column}
                     <td class="px-4 py-2 whitespace-nowrap text-sm">
-                      <slot name="cell" {column} {row} />
+                      <slot
+                        name="cell"
+                        {column}
+                        {row}
+                      />
                     </td>
                   {/each}
                   {#if $$slots.actions}
                     <td class="px-4 py-2 whitespace-nowrap text-right text-sm font-medium">
-                      <slot name="actions" {row} />
+                      <slot
+                        name="actions"
+                        {row}
+                      />
                     </td>
                   {/if}
                 </tr>

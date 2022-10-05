@@ -24,6 +24,9 @@
   });
 </script>
 
-<div class:animate-flash-green={inc} class:animate-flash-red={dec}>
+<div
+  class:animate-flash-green={inc}
+  class:animate-flash-red={dec}
+>
   <slot />
 </div>

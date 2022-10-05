@@ -11,7 +11,7 @@
       minimumFractionDigits: precision,
       maximumFractionDigits: precision,
     });
-  };
+  }
 </script>
 
 {formattedValue}

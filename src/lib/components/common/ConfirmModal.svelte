@@ -26,5 +26,11 @@
 <Modal bind:this={modal}>
   <svelte:fragment slot="title">{titleFn(modalData)}</svelte:fragment>
   <svelte:fragment slot="body">{messageFn(modalData)}</svelte:fragment>
-  <Button class="btn-primary" slot="actionButtons" on:click={() => confirmFn(modalData)}>{confirmBtnLabel}</Button>
+  <Button
+    class="btn-primary"
+    slot="actionButtons"
+    on:click={() => confirmFn(modalData)}
+  >
+    {confirmBtnLabel}
+  </Button>
 </Modal>

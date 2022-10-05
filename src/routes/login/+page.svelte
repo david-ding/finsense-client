@@ -24,7 +24,7 @@
   async function login() {
     dispatch(authApiEndpoints.login.initiate(credentials));
 
-    onFirstAction("authApi/executeMutation/fulfilled", ({ payload: { token }}) => {
+    onFirstAction("authApi/executeMutation/fulfilled", ({ payload: { token } }) => {
       localStorage.setItem("token", token);
       goto(MEMBER_DASHBOARD);
     });
@@ -38,13 +38,31 @@
       {#if $loginFailed}
         <Alert type="danger">Login failed</Alert>
       {/if}
-      <FormField class="w-full" label="Email" name="email">
-        <Input autocomplete="email" bind:value={credentials.email} />
+      <FormField
+        class="w-full"
+        label="Email"
+        name="email"
+      >
+        <Input
+          autocomplete="email"
+          bind:value={credentials.email}
+        />
       </FormField>
-      <FormField class="w-full" label="Password" name="password">
-        <Input autocomplete="current-password" type="password" bind:value={credentials.password} />
+      <FormField
+        class="w-full"
+        label="Password"
+        name="password"
+      >
+        <Input
+          autocomplete="current-password"
+          type="password"
+          bind:value={credentials.password}
+        />
       </FormField>
-      <Button class="btn-primary w-full" disabled={$isLoading}>Login</Button>
+      <Button
+        class="btn-primary w-full"
+        disabled={$isLoading}>Login</Button
+      >
     </Card>
   </div>
 </form>

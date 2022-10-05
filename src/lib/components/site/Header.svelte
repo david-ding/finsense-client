@@ -92,7 +92,10 @@
         </div>
       </div>
       <div class="-mr-2 flex md:hidden">
-        <Button class="btn-dark" on:click={toggleMobileMenuExpanded}>
+        <Button
+          class="btn-dark"
+          on:click={toggleMobileMenuExpanded}
+        >
           <svelte:component this={mobileMenuExpanded ? CrossIcon : MenuIcon} />
         </Button>
       </div>
@@ -100,7 +103,10 @@
   </div>
 
   {#if mobileMenuExpanded}
-    <div class="md:hidden" transition:slide={{ duration: 1000, easing: expoOut }}>
+    <div
+      class="md:hidden"
+      transition:slide={{ duration: 1000, easing: expoOut }}
+    >
       <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
         {#each menuItems as menuItem}
           <a

@@ -13,7 +13,10 @@
 </script>
 
 <!-- svelte-ignore a11y-mouse-events-have-key-events -->
-<div on:mouseover={show} on:mouseleave={hide}>
+<div
+  on:mouseover={show}
+  on:mouseleave={hide}
+>
   <slot />
 </div>
 

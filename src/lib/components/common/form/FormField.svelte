@@ -31,10 +31,16 @@
 </script>
 
 <div class={mergeClassNames(classNames)}>
-  <label for={htmlId} class="block text-sm font-medium text-gray-700">{label}</label>
+  <label
+    for={htmlId}
+    class="block text-sm font-medium text-gray-700">{label}</label
+  >
   <div class="mt-1 relative">
     <Tooltip message={$fieldError}>
-      <slot {htmlId} invalid={$invalid} />
+      <slot
+        {htmlId}
+        invalid={$invalid}
+      />
     </Tooltip>
   </div>
 </div>

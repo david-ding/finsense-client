@@ -4,4 +4,7 @@ import { rootStore } from "$lib/stores/root-store";
 
 export const dashboardStore = derived(rootStore<RootState>(), ($rootStore) => $rootStore.dashboard);
 
-export const targetCurrencyCode = derived(dashboardStore, ($dashboardStore) => $dashboardStore.targetCurrencyCode);
+export const targetCurrencyCode = derived(
+  dashboardStore,
+  ($dashboardStore) => $dashboardStore.targetCurrencyCode,
+);

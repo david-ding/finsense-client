@@ -43,8 +43,17 @@
   }
 </script>
 
-<Table class={classNames} {columns} isLoading={$isLoading} rows={$orders}>
-  <div slot="cell" let:column let:row>
+<Table
+  class={classNames}
+  {columns}
+  isLoading={$isLoading}
+  rows={$orders}
+>
+  <div
+    slot="cell"
+    let:column
+    let:row
+  >
     {#if column.prop === "price"}
       <CurrencyAmountFormatter amount={row[column.prop]} />
     {:else if column.prop === "date"}
@@ -63,9 +72,17 @@
     {/if}
   </div>
 
-  <div slot="actions" let:row>
+  <div
+    slot="actions"
+    let:row
+  >
     <Link on:click={() => editOrder(row.id)}>Edit</Link>
-    <Link class="text-red-500 ml-4" on:click={() => deleteOrder(row)}>Delete</Link>
+    <Link
+      class="text-red-500 ml-4"
+      on:click={() => deleteOrder(row)}
+    >
+      Delete
+    </Link>
   </div>
 </Table>
 

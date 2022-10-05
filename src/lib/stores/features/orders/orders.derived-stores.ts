@@ -5,7 +5,9 @@ import { rootStore } from "$lib/stores/root-store";
 
 export const ordersStore = derived(rootStore<RootState>(), ($rootStore) => $rootStore.orders);
 
-export const orders = derived(ordersStore, ($ordersStore) => orderBy($ordersStore.entities, "date", "desc"));
+export const orders = derived(ordersStore, ($ordersStore) =>
+  orderBy($ordersStore.entities, "date", "desc"),
+);
 
 export const isLoading = derived(ordersStore, ($ordersStore) => $ordersStore.isLoading);
 

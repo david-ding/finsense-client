@@ -9,16 +9,7 @@
   export { classNames as class };
 </script>
 
-<Card
-  class={mergeClassNames([
-    "px-4",
-    "py-2",
-    "flex",
-    "flex-col",
-    "justify-center",
-    classNames,
-  ])}
->
+<Card class={mergeClassNames(["px-4", "py-2", "flex", "flex-col", "justify-center", classNames])}>
   <div class="text-xs text-gray-400"><slot name="label" /></div>
   {#if isLoading}
     <div class="animate-pulse bg-gray-500 w-24 leading-4 my-1">&nbsp;</div>

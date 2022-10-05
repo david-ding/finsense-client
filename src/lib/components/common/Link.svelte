@@ -10,10 +10,7 @@
 </script>
 
 <a
-  class={mergeClassNames([
-    "no-underline text-current cursor-pointer",
-    classNames,
-  ])}
+  class={mergeClassNames(["no-underline text-current cursor-pointer", classNames])}
   href={to}
   target={openInNewWindow ? "_blank" : undefined}
   on:click

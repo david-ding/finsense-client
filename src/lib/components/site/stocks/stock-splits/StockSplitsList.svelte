@@ -1,6 +1,7 @@
 <script lang="ts">
   import ConfirmModal from "$lib/components/common/ConfirmModal.svelte";
   import DateTimeFormatter from "$lib/components/common/formatters/DateTimeFormatter.svelte";
+  import RatioFormatter from "$lib/components/common/formatters/RatioFormatter.svelte";
   import Link from "$lib/components/common/Link.svelte";
   import type { TableColumn } from "$lib/components/common/Table.svelte";
   import Table from "$lib/components/common/Table.svelte";
@@ -20,7 +21,7 @@
 
   export { classNames as class };
 
-  const columns: Array<TableColumn> = [{ prop: "symbol" }, { prop: "date" }];
+  const columns: Array<TableColumn> = [{ prop: "symbol" }, { prop: "date" }, { prop: "ratio" }];
 
   onMount(() => dispatch(stockSplitsApiEndpoints.index.initiate()));
 
@@ -51,6 +52,8 @@
   >
     {#if column.prop === "date"}
       <DateTimeFormatter value={row.date} />
+    {:else if column.prop === "ratio"}
+      <RatioFormatter value={row.ratio} />
     {:else}
       {row[column.prop]}
     {/if}

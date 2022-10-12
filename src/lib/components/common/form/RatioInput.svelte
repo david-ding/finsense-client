@@ -1,59 +1,61 @@
 <script lang="ts">
-  import mergeClassNames from "$lib/utils/merge-class-names";
-  // import type { Observable } from "rxjs";
-  import { createEventDispatcher, getContext } from "svelte";
+  import Input from "./Input.svelte";
+  import type { Ratio } from "$lib/entities/ratio";
+  import { Subject } from "rxjs";
+  import { combineLatestWith } from "rxjs/operators";
+  import { getContext, onMount } from "svelte";
 
-  // const invalid = getContext<Observable<boolean>>("invalid");
   const htmlId = getContext<string>("htmlId");
 
   export let name: string = null;
-  export let value: string | number = null;
+  export let value: Ratio = null;
 
-  const dispatch = createEventDispatcher();
+  const antecedentSubject$ = new Subject<number>();
+  const consequentSubject$ = new Subject<number>();
 
-  const handleInput = () => {
-    // const eventTarget = event.target as HTMLInputElement;
-    // value = type === "number" ? +eventTarget.value : eventTarget.value;
-    dispatch("input", value);
+  const handleAntecedentInput = (event: CustomEvent) => {
+    antecedentSubject$.next(+event.detail);
   };
+
+  const handleConsequentInput = (event: CustomEvent) => {
+    consequentSubject$.next(+event.detail);
+  };
+
+  onMount(() => {
+    return antecedentSubject$
+      .pipe(combineLatestWith(consequentSubject$))
+      .subscribe(([antecedent, consequent]) => {
+        value = { antecedent, consequent };
+      });
+  });
 </script>
 
-<div class="rounded-md shadow-sm flex justify-center border border-gray-300">
-  <input
-    class={mergeClassNames([
-      "focus:shadow-none",
-      "focus:border-none",
-      "shadow-none",
-      "border-none",
-      "rounded-md",
-      "grow-0",
-      "shrink",
-      "px-4",
-      "w-full",
-      "sm:text-sm",
-    ])}
+<div class="flex items-center">
+  <Input
+    {name}
+    htmlIdOverride={htmlId}
+    on:input={handleAntecedentInput}
+    maskOptions={{
+      mask: Number,
+      scale: 0,
+      signed: false,
+      max: 999,
+    }}
     type="text"
-    name={name || htmlId}
-    on:input={handleInput}
-    id={htmlId}
+    value={value?.antecedent}
   />
-  <div class="text-gray-500 sm:text-sm flex flex-1 items-center">-for-</div>
-  <input
-    class={mergeClassNames([
-      "focus:shadow-none",
-      "focus:border-none",
-      "shadow-none",
-      "border-none",
-      "rounded-md",
-      "grow-0",
-      "shrink",
-      "px-4",
-      "w-full",
-      "sm:text-sm",
-    ])}
+  &nbsp;for&nbsp;
+  <Input
+    name={name && `${name}-consequent`}
+    htmlIdOverride={`${htmlId}-consequent`}
+    on:input={handleConsequentInput}
+    maskOptions={{
+      mask: Number,
+      scale: 0,
+      signed: false,
+      max: 999,
+    }}
     type="text"
-    name={name || htmlId}
-    on:input={handleInput}
-    id={htmlId}
+    value={value?.consequent}
   />
 </div>

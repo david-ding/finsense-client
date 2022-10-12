@@ -33,24 +33,7 @@
     label="Split Ratio"
     name="ratio"
   >
-    <!-- <Input
-      on:input={console.log}
-      name="ratio"
-      maskOptions={{
-        mask: "A:B",
-        lazy: false,
-        blocks: {
-          A: {
-            mask: "0[00]",
-          },
-          B: {
-            mask: "0",
-          },
-        },
-      }}
-      type="text"
-    /> -->
-    <RatioInput />
+    <RatioInput bind:value={stockSplit.ratio} />
   </FormField>
   <FormField
     class="col-span-3"

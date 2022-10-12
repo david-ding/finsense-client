@@ -5,8 +5,9 @@
   import type { Observable } from "rxjs";
 
   const invalid = getContext<Observable<boolean>>("invalid");
-  const htmlId = getContext<string>("htmlId");
+  $: htmlId = htmlIdOverride || getContext<string>("htmlId");
 
+  export let htmlIdOverride: string = null;
   export let maskOptions: unknown = null;
   export let name: string = null;
   export let placeholder: string = null;

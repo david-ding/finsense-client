@@ -5,10 +5,12 @@ import { Subject } from "rxjs";
 import { exchangeRatesApi } from "$lib/stores/features/exchange-rates/exchange-rates.api";
 import { holdingsApi } from "$lib/stores/features/holdings/holdings.api";
 import { ordersApi } from "$lib/stores/features/orders/orders.api";
+import { stockSplitsApi } from "$lib/stores/features/stock-splits/stock-splits.api";
 import { stockSymbolsApi } from "$lib/stores/features/stock-symbols/stock-symbols.api";
 import stockSymbolsReducer from "$lib/stores/features/stock-symbols/stock-symbols.store";
 import exchangeRatesReducer from "$lib/stores/features/exchange-rates/exchange-rates.store";
 import ordersReducer from "$lib/stores/features/orders/orders.store";
+import stockSplitsReducer from "$lib/stores/features/stock-splits/stock-splits.store";
 import holdingsReducer from "$lib/stores/features/holdings/holdings.store";
 import dashboardReducer from "$lib/stores/features/dashboard/dashboard.store";
 import authReducer from "$lib/stores/features/auth/auth.store";
@@ -38,6 +40,8 @@ const reduxStore = configureStore({
     [stockSymbolsApi.reducerPath]: stockSymbolsApi.reducer,
     orders: ordersReducer,
     [ordersApi.reducerPath]: ordersApi.reducer,
+    stockSplits: stockSplitsReducer,
+    [stockSplitsApi.reducerPath]: stockSplitsApi.reducer,
     exchangeRates: exchangeRatesReducer,
     [exchangeRatesApi.reducerPath]: exchangeRatesApi.reducer,
     holdings: holdingsReducer,
@@ -51,6 +55,7 @@ const reduxStore = configureStore({
       .concat(unauthenticatedHandlerMiddleware)
       .concat(stockSymbolsApi.middleware)
       .concat(ordersApi.middleware)
+      .concat(stockSplitsApi.middleware)
       .concat(exchangeRatesApi.middleware)
       .concat(holdingsApi.middleware),
 });

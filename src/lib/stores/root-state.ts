@@ -4,10 +4,12 @@ import type { StockSymbolState } from "$lib/stores/features/stock-symbols/stock-
 import type { HoldingsState } from "$lib/stores/features/holdings/holdings.store";
 import type { DashboardState } from "$lib/stores/features/dashboard/dashboard.store";
 import type { AuthState } from "$lib/stores/features/auth/auth.store";
+import type { StockSplitState } from "$lib/stores/features/stock-splits/stock-splits.store";
 
 export type RootState = {
   auth: AuthState;
   orders: OrderState;
+  stockSplits: StockSplitState;
   stockSymbols: StockSymbolState;
   exchangeRates: ExchangeRatesState;
   holdings: HoldingsState;

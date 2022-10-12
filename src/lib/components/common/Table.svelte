@@ -40,7 +40,7 @@
                 </th>
               {/each}
 
-              {#if $$slots.actions}
+              {#if rows.length && $$slots.actions}
                 <th
                   scope="col"
                   class="relative px-4 py-2"
@@ -59,7 +59,7 @@
                       <div class="animate-pulse bg-gray-500">&nbsp;</div>
                     </td>
                   {/each}
-                  {#if $$slots.actions}
+                  {#if rows.length && $$slots.actions}
                     <td class="px-4 py-2 whitespace-nowrap text-right text-sm font-medium">
                       <div class="animate-pulse bg-gray-500">&nbsp;</div>
                     </td>

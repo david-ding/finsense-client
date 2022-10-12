@@ -43,10 +43,7 @@
         label="Email"
         name="email"
       >
-        <Input
-          autocomplete="email"
-          bind:value={credentials.email}
-        />
+        <Input autocomplete="email" bind:value={credentials.email} />
       </FormField>
       <FormField
         class="w-full"

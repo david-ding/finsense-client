@@ -4,7 +4,8 @@
     LOGOUT,
     MEMBER_DASHBOARD,
     MEMBER_SETTINGS,
-    MEMBER_STOCK_ORDERS,
+    MEMBER_ORDERS,
+    MEMBER_STOCK_SPLITS,
   } from "$lib/constants/routes";
   import type { MenuItem } from "$lib/entities/menu-item";
 
@@ -15,7 +16,11 @@
     },
     {
       label: "Orders",
-      path: MEMBER_STOCK_ORDERS,
+      path: MEMBER_ORDERS,
+    },
+    {
+      label: "Stock Splits",
+      path: MEMBER_STOCK_SPLITS,
     },
     {
       label: "Settings",

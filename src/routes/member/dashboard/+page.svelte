@@ -31,6 +31,7 @@
   } from "$lib/stores/features/exchange-rates/exchange-rates.derived-stores";
   import { formatDate } from "$lib/utils/date.utils";
   import { targetCurrencyCode } from "$lib/stores/features/dashboard/dashboard.derived-stores";
+  import RefreshIcon from "$lib/components/common/icons/RefreshIcon.svelte";
 
   setContext("targetCurrencyCode", targetCurrencyCode);
 
@@ -51,9 +52,16 @@
 <div class="sm:flex sm:justify-between">
   <h2>Dashboard</h2>
 
-  <div class="flex items-center">
+  <div class="flex items-center flex-wrap">
     <Button
-      class="btn-phantom w-full sm:w-32 leading-4"
+      class="btn-phantom w-full sm:w-32"
+      on:click={() => dispatch(holdingsApiEndpoints.updateEodQuotes.initiate())}
+    >
+      <RefreshIcon />
+    </Button>
+
+    <Button
+      class="btn-phantom w-full mt-4 sm:w-32 sm:mt-0 sm:ml-4"
       on:click={() =>
         dispatch(
           dashboardActions.setTargetCurrencyCode($targetCurrencyCode === "USD" ? "AUD" : "USD"),
@@ -67,7 +75,7 @@
     </Button>
 
     <Button
-      class="btn-phantom ml-4 sm:w-32"
+      class="btn-phantom w-full mt-4 sm:w-32 sm:mt-0 sm:ml-4"
       on:click={() => dispatch(holdingsActions.setLiveMode(!$isLiveMode))}
     >
       {#if $isLiveMode}

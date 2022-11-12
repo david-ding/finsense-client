@@ -10,6 +10,14 @@ export const holdingsApi = createApi({
     index: builder.query<Array<Holding>, void>({
       query: () => "/holdings",
     }),
+    updateEodQuotes: builder.mutation<void, void>({
+      query() {
+        return {
+          url: "/holdings/updateEodQuotes",
+          method: "POST",
+        };
+      },
+    }),
   }),
 });
 

@@ -1,4 +1,4 @@
-import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { createEntityAdapter, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import type { EntityState } from "@reduxjs/toolkit";
 import type { Holding } from "$lib/entities/holding";
 import { holdingsApiEndpoints } from "$lib/stores/features/holdings/holdings.api";
@@ -18,7 +18,10 @@ const initialState: HoldingsState = {
   isLoading: false,
 };
 
-const { matchPending, matchFulfilled } = holdingsApiEndpoints.index;
+const { matchPending: indexMatchPending, matchFulfilled: indexMatchFulfilled } =
+  holdingsApiEndpoints.index;
+const { matchPending: updateEodQuotesMatchPending, matchFulfilled: updateEodQuotesMatchFulfilled } =
+  holdingsApiEndpoints.updateEodQuotes;
 
 const holdingsSlice = createSlice({
   name: "holdings",
@@ -35,10 +38,10 @@ const holdingsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addMatcher(matchPending, (state) => {
+    builder.addMatcher(isAnyOf(indexMatchPending, updateEodQuotesMatchPending), (state) => {
       state.isLoading = true;
     });
-    builder.addMatcher(matchFulfilled, (state, { payload }) =>
+    builder.addMatcher(indexMatchFulfilled, (state, { payload }) =>
       holdingsAdapter.setAll(
         {
           ...state,
@@ -47,6 +50,9 @@ const holdingsSlice = createSlice({
         payload,
       ),
     );
+    builder.addMatcher(updateEodQuotesMatchFulfilled, (state) => {
+      state.isLoading = false;
+    });
   },
 });
 

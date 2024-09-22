@@ -18,7 +18,7 @@ const connectFinnhubLiveQuotes = async (): Promise<WebSocket> => {
     return socket;
   }
 
-  socket = new WebSocket("wss://ws.finnhub.io?token=bqdeoq7rh5rf95updm4g");
+  socket = new WebSocket("wss://ws.finnhub.io?token=ckq70f1r01qhi0265jbgckq70f1r01qhi0265jc0");
 
   const latestSymbols = await lastValueFrom(
     observe(symbols).pipe(filter<Array<string>>(negate(isEmpty)), take(1)),

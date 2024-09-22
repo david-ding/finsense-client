@@ -9,9 +9,8 @@ const config: UserConfig = {
     port: 3000,
     proxy: {
       "/api": {
-        target: "http://localhost:3333",
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, "/api/v1"),
+        target: "http://finsense-api:3333",
+        rewrite: (path) => path.replace(/^\/api/, "/"),
       },
     },
   },

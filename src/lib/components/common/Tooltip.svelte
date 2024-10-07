@@ -14,6 +14,7 @@
 
 <!-- svelte-ignore a11y-mouse-events-have-key-events -->
 <div
+  role="tooltip"
   on:mouseover={show}
   on:mouseleave={hide}
 >

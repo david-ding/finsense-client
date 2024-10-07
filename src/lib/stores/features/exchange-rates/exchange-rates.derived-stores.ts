@@ -1,11 +1,7 @@
 import { derived } from "svelte/store";
-import type { RootState } from "$lib/stores/root-state";
 import { rootStore } from "$lib/stores/root-store";
 
-export const exchangeRatesStore = derived(
-  rootStore<RootState>(),
-  ($rootStore) => $rootStore.exchangeRates,
-);
+export const exchangeRatesStore = derived(rootStore(), ($rootStore) => $rootStore.exchangeRates);
 
 export const exchangeRates = derived(
   exchangeRatesStore,

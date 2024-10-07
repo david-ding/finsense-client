@@ -1,9 +1,8 @@
-import type { RootState } from "$lib/stores/root-state";
 import { rootStore } from "$lib/stores/root-store";
 import { add, multiply, percentageOf, subtract } from "$lib/utils/currency-amount.utils";
 import { derived } from "svelte/store";
 
-export const holdingsStore = derived(rootStore<RootState>(), ($rootStore) => $rootStore.holdings);
+export const holdingsStore = derived(rootStore(), ($rootStore) => $rootStore.holdings);
 
 export const holdings = derived(holdingsStore, ($holdingsStore) =>
   $holdingsStore.ids.map((id) => $holdingsStore.entities[id]),

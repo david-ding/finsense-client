@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/index.js";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
 import type { StockSymbol } from "$lib/entities/stock-symbol";
 import { prepareHeadersWithAuth } from "$lib/utils/auth.utils";
 

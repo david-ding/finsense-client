@@ -1,12 +1,8 @@
 import { orderBy } from "lodash-es";
 import { derived } from "svelte/store";
-import type { RootState } from "$lib/stores/root-state";
 import { rootStore } from "$lib/stores/root-store";
 
-export const stockSplitsStore = derived(
-  rootStore<RootState>(),
-  ($rootStore) => $rootStore.stockSplits,
-);
+export const stockSplitsStore = derived(rootStore(), ($rootStore) => $rootStore.stockSplits);
 
 export const stockSplits = derived(stockSplitsStore, ($stockSplitsStore) =>
   orderBy($stockSplitsStore.entities, "date", "desc"),

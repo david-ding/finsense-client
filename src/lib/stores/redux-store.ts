@@ -1,22 +1,22 @@
-import { configureStore } from "@reduxjs/toolkit";
-import type { Middleware, MiddlewareAPI } from "@reduxjs/toolkit";
-import type { AnyAction } from "redux";
-import { Subject } from "rxjs";
+import authReducer from "$lib/stores/features/auth/auth.store";
+import dashboardReducer from "$lib/stores/features/dashboard/dashboard.store";
 import { exchangeRatesApi } from "$lib/stores/features/exchange-rates/exchange-rates.api";
+import exchangeRatesReducer from "$lib/stores/features/exchange-rates/exchange-rates.store";
 import { holdingsApi } from "$lib/stores/features/holdings/holdings.api";
+import holdingsReducer from "$lib/stores/features/holdings/holdings.store";
 import { ordersApi } from "$lib/stores/features/orders/orders.api";
+import ordersReducer from "$lib/stores/features/orders/orders.store";
 import { stockSplitsApi } from "$lib/stores/features/stock-splits/stock-splits.api";
+import stockSplitsReducer from "$lib/stores/features/stock-splits/stock-splits.store";
 import { stockSymbolsApi } from "$lib/stores/features/stock-symbols/stock-symbols.api";
 import stockSymbolsReducer from "$lib/stores/features/stock-symbols/stock-symbols.store";
-import exchangeRatesReducer from "$lib/stores/features/exchange-rates/exchange-rates.store";
-import ordersReducer from "$lib/stores/features/orders/orders.store";
-import stockSplitsReducer from "$lib/stores/features/stock-splits/stock-splits.store";
-import holdingsReducer from "$lib/stores/features/holdings/holdings.store";
-import dashboardReducer from "$lib/stores/features/dashboard/dashboard.store";
-import authReducer from "$lib/stores/features/auth/auth.store";
 import { logout } from "$lib/utils/auth.utils";
+import type { Middleware, MiddlewareAPI } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
+import type { UnknownAction } from "redux";
+import { Subject } from "rxjs";
 
-const actions = new Subject<AnyAction>();
+const actions = new Subject<UnknownAction>();
 
 const unauthenticatedHandlerMiddleware: Middleware = (api: MiddlewareAPI) => {
   return (next) => {
@@ -60,6 +60,7 @@ const reduxStore = configureStore({
       .concat(holdingsApi.middleware),
 });
 
+export type RootState = ReturnType<typeof reduxStore.getState>;
 export const { dispatch } = reduxStore;
 export { actions };
 export default reduxStore;

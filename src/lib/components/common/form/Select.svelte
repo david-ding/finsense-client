@@ -2,8 +2,7 @@
   import type { Observable } from "rxjs";
   import { debounce } from "lodash-es";
   import { getContext } from "svelte";
-  import SvelteSelectableSelect from "svelte-selectbox";
-  import type { SelectOption } from "svelte-selectbox";
+  import SvelteSelectbox, { type SelectOption } from "svelte-selectbox";
 
   const invalid = getContext<Observable<boolean>>("invalid");
   const htmlId = getContext<string>("htmlId");
@@ -20,7 +19,7 @@
   const debouncedSearchFn = searchFn ? debounce(searchFn, 300) : null;
 </script>
 
-<SvelteSelectableSelect
+<SvelteSelectbox
   {appendTo}
   {htmlId}
   {options}
@@ -47,5 +46,6 @@
   --dropdown-box-shadow="none"
   --dropdown-item-background-highlighted="#6366f1"
   --dropdown-item-background-hover="#e0e7ff"
+  --dropdown-item-color-highlighted="#ffffff"
   --cursor={cursorType}
 />

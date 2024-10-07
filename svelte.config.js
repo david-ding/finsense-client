@@ -1,25 +1,17 @@
-import adapter from "@sveltejs/adapter-auto";
-import preprocess from "svelte-preprocess";
+import adapter from "@sveltejs/adapter-node";
+import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-  // Consult https://github.com/sveltejs/svelte-preprocess
-  // for more information about preprocessors
-  preprocess: [
-    preprocess({
-      postcss: true,
-    }),
-  ],
-
+  preprocess: [vitePreprocess()],
   kit: {
     adapter: adapter(),
   },
-
   vitePlugin: {
-    experimental: {
-      inspector: {
-        holdMode: true,
-      },
+    // Allows you to hold ctrl+shift and click on an item in the browser and it then
+    // opens that components location in VSCode
+    inspector: {
+      holdMode: true,
     },
   },
 };

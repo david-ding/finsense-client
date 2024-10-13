@@ -7,6 +7,7 @@
   import Button from "$lib/components/common/Button.svelte";
   import CrossIcon from "$lib/components/common/icons/CrossIcon.svelte";
   import MenuIcon from "$lib/components/common/icons/MenuIcon.svelte";
+  import Logo from "../common/icons/Logo.svelte";
 
   let mobileMenuExpanded: boolean;
   let userMenuExpanded: boolean;
@@ -28,12 +29,8 @@
     <div class="flex items-center justify-between h-16">
       <div class="w-full flex justify-between">
         <div class="flex items-center">
-          <div class="flex-shrink-0">
-            <img
-              class="h-8 w-8"
-              src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-              alt="Workflow"
-            />
+          <div class="flex-shrink-0 text-white">
+            <Logo fill="currentColor" />
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">

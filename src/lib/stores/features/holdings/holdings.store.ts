@@ -6,10 +6,10 @@ import { holdingsApiEndpoints } from "$lib/stores/features/holdings/holdings.api
 export type HoldingsState = {
   isLiveMode: boolean;
   isLoading: boolean;
-} & EntityState<Holding>;
+} & EntityState<Holding, string>;
 
-const holdingsAdapter = createEntityAdapter<Holding>({
-  selectId: (holding) => holding.symbol,
+const holdingsAdapter = createEntityAdapter({
+  selectId: (holding: Holding) => holding.symbol,
 });
 
 const initialState: HoldingsState = {

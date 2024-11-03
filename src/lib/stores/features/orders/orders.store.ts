@@ -7,7 +7,7 @@ export type OrderState = {
   orderModalDisplayed: { id: string };
   isLoading: boolean;
   validationErrors: Record<string, string>;
-} & EntityState<Order>;
+} & EntityState<Order, string>;
 
 const ordersAdapter = createEntityAdapter<Order>();
 

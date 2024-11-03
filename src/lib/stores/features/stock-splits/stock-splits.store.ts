@@ -7,7 +7,7 @@ export type StockSplitState = {
   stockSplitModalDisplayed: { id: string };
   isLoading: boolean;
   validationErrors: Record<string, string>;
-} & EntityState<StockSplit>;
+} & EntityState<StockSplit, string>;
 
 const stockSplitsAdapter = createEntityAdapter<StockSplit>();
 

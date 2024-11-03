@@ -10,7 +10,7 @@
   import { dispatch } from "$lib/stores/redux-store";
   import { setContext } from "svelte";
 
-  export let stockSplit: StockSplit = {};
+  export let stockSplit: StockSplit = { id: null };
 
   setContext("errorMessages", validationErrors);
 </script>

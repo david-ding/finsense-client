@@ -19,15 +19,23 @@
 
   const targetCurrencyCode =
     getContext<Readable<string>>("targetCurrencyCode") || readable<string>("USD");
+
+  // This assumes we only have 2 currencies: USD and AUD
   const targetAmount = combineLatest([
     observe(targetCurrencyCode),
     sourceAmount.asObservable(),
   ]).pipe(
-    map(([code, sourceAmount]) =>
-      !code || sourceAmount.code === code
-        ? sourceAmount
-        : convertToForeign(sourceAmount, $usdAudRate?.value, code),
-    ),
+    map(([code, sourceAmount]) => {
+      if (!code || sourceAmount.code === code) {
+        return sourceAmount;
+      }
+
+      if (sourceAmount.code === "USD") {
+        return convertToForeign(sourceAmount, $usdAudRate?.value, code);
+      }
+
+      return convertToForeign(sourceAmount, 1 / $usdAudRate?.value, code);
+    }),
   );
 </script>
 

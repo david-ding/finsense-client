@@ -5,10 +5,10 @@ import { exchangeRatesApiEndpoints } from "$lib/stores/features/exchange-rates/e
 
 export type ExchangeRatesState = {
   isLoading: boolean;
-} & EntityState<ExchangeRate>;
+} & EntityState<ExchangeRate, string>;
 
-const exchangeRatesAdapter = createEntityAdapter<ExchangeRate>({
-  selectId: (exchangeRate) => exchangeRate.key,
+const exchangeRatesAdapter = createEntityAdapter({
+  selectId: (exchangeRate: ExchangeRate) => exchangeRate.key,
 });
 
 const initialState: ExchangeRatesState = {

@@ -43,7 +43,7 @@
           return modal?.close();
         }
         const { id } = data;
-        order = id ? cloneDeep(await getOrder(id)) : {};
+        order = id ? cloneDeep(await getOrder(id)) : { id: null };
 
         modal?.open();
       });

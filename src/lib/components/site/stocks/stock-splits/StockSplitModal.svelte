@@ -50,7 +50,7 @@
           return modal?.close();
         }
         const { id } = data;
-        stockSplit = id ? cloneDeep(await getStockSplit(id)) : {};
+        stockSplit = id ? cloneDeep(await getStockSplit(id)) : { id: null };
 
         modal?.open();
       });

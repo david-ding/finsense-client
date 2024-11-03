@@ -20,7 +20,7 @@
   ];
 
   export let orderType: OrderType = null;
-  export let order: Order = { type: orderType };
+  export let order: Order = { id: null, type: orderType };
 
   let currencyCode: string;
 
@@ -29,7 +29,7 @@
   const resetStockSymbols = () => dispatch(stockSymbolsActions.reset());
   const setCurrencyCode = (event: CustomEvent) => {
     const stockSymbol = event.detail;
-    currencyCode = stockSymbol.value.endsWith(".AX") ? "AUD" : "USD";
+    currencyCode = stockSymbol.value.endsWith(".AU") ? "AUD" : "USD";
   };
 </script>
 

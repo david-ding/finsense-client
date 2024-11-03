@@ -10,7 +10,7 @@
 <button
   class={mergeClassNames(classNames)}
   {disabled}
-  on:click
+  on:click|preventDefault
 >
   <slot name="leftIcon" />
   <slot />

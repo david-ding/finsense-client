@@ -2,11 +2,12 @@ import { isEmpty, negate } from "lodash-es";
 import { lastValueFrom, Subject, Subscription } from "rxjs";
 import { filter, take, throttleTime } from "rxjs/operators";
 import type { Holding } from "$lib/entities/holding";
-import { symbols } from "$lib/stores/features/holdings/holdings.derived-stores";
+import { usSymbols } from "$lib/stores/features/holdings/holdings.derived-stores";
 import { holdingsActions } from "$lib/stores/features/holdings/holdings.store";
 import { dispatch } from "$lib/stores/redux-store";
 import { createCurrencyAmount } from "$lib/utils/currency-amount.utils";
 import { observe } from "$lib/utils/store.utils";
+import { Currency } from "$lib/entities/currency-amount";
 
 let socket: WebSocket;
 const liveQuote$Map: Record<string, Subject<Partial<Holding>>> = {};
@@ -21,7 +22,7 @@ const connectFinnhubLiveQuotes = async (): Promise<WebSocket> => {
   socket = new WebSocket("wss://ws.finnhub.io?token=ckq70f1r01qhi0265jbgckq70f1r01qhi0265jc0");
 
   const latestSymbols = await lastValueFrom(
-    observe(symbols).pipe(filter<Array<string>>(negate(isEmpty)), take(1)),
+    observe(usSymbols).pipe(filter<Array<string>>(negate(isEmpty)), take(1)),
   );
 
   socket.onopen = () => {
@@ -51,7 +52,7 @@ const connectFinnhubLiveQuotes = async (): Promise<WebSocket> => {
     liveQuotes?.forEach(({ s: symbol, p: priceValue }) =>
       liveQuote$Map[symbol].next({
         symbol,
-        price: createCurrencyAmount(priceValue, "USD"),
+        price: createCurrencyAmount(priceValue, Currency.USD),
       }),
     );
   };

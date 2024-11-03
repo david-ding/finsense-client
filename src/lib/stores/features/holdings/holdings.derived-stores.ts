@@ -1,11 +1,24 @@
 import { rootStore } from "$lib/stores/root-store";
 import { add, multiply, percentageOf, subtract } from "$lib/utils/currency-amount.utils";
+import { getExchangeFromSymbol, isUSSymbol } from "$lib/utils/symbol.utils";
 import { derived } from "svelte/store";
 
 export const holdingsStore = derived(rootStore(), ($rootStore) => $rootStore.holdings);
 
 export const holdings = derived(holdingsStore, ($holdingsStore) =>
-  $holdingsStore.ids.map((id) => $holdingsStore.entities[id]),
+  $holdingsStore.ids
+    .map((id) => $holdingsStore.entities[id])
+    .filter((holding) => {
+      if (!$holdingsStore.exchangeFilter) {
+        return true;
+      }
+      return getExchangeFromSymbol(holding.symbol) === $holdingsStore.exchangeFilter;
+    }),
+);
+
+export const exchangeFilter = derived(
+  holdingsStore,
+  ($holdingsStore) => $holdingsStore.exchangeFilter,
 );
 
 export const isLiveMode = derived(holdingsStore, ($holdingsStore) => $holdingsStore.isLiveMode);
@@ -13,6 +26,8 @@ export const isLiveMode = derived(holdingsStore, ($holdingsStore) => $holdingsSt
 export const isLoading = derived(holdingsStore, ($holdingsStore) => $holdingsStore.isLoading);
 
 export const symbols = derived(holdingsStore, ($holdingsStore) => $holdingsStore.ids);
+
+export const usSymbols = derived(symbols, ($symbols) => $symbols.filter(isUSSymbol));
 
 export const totalCost = derived(holdings, ($holdings) =>
   add(...$holdings.map((holding) => multiply(holding.avgPrice, holding.quantity))),

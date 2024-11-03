@@ -2,10 +2,12 @@ import { createEntityAdapter, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import type { EntityState } from "@reduxjs/toolkit";
 import type { Holding } from "$lib/entities/holding";
 import { holdingsApiEndpoints } from "$lib/stores/features/holdings/holdings.api";
+import { Exchange } from "$lib/entities/exchange";
 
 export type HoldingsState = {
   isLiveMode: boolean;
   isLoading: boolean;
+  exchangeFilter: Exchange;
 } & EntityState<Holding, string>;
 
 const holdingsAdapter = createEntityAdapter({
@@ -16,6 +18,7 @@ const initialState: HoldingsState = {
   ...holdingsAdapter.getInitialState(),
   isLiveMode: false,
   isLoading: false,
+  exchangeFilter: undefined,
 };
 
 const { matchPending: indexMatchPending, matchFulfilled: indexMatchFulfilled } =
@@ -35,6 +38,9 @@ const holdingsSlice = createSlice({
         id: payload.symbol,
         changes: payload,
       });
+    },
+    setExchangeFilter: (state, { payload }) => {
+      state.exchangeFilter = payload;
     },
   },
   extraReducers: (builder) => {

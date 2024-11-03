@@ -6,7 +6,7 @@
   import { readable } from "svelte/store";
   import type { Readable } from "svelte/store";
 
-  import type { CurrencyAmount } from "$lib/entities/currency-amount";
+  import { Currency, type CurrencyAmount } from "$lib/entities/currency-amount";
   import { usdAudRate } from "$lib/stores/features/exchange-rates/exchange-rates.derived-stores";
   import { convertToForeign, isNegative } from "$lib/utils/currency-amount.utils";
   import { observe } from "$lib/utils/store.utils";
@@ -18,7 +18,7 @@
   $: sourceAmount.next(amount);
 
   const targetCurrencyCode =
-    getContext<Readable<string>>("targetCurrencyCode") || readable<string>("USD");
+    getContext<Readable<string>>("targetCurrencyCode") || readable<string>(Currency.USD);
 
   // This assumes we only have 2 currencies: USD and AUD
   const targetAmount = combineLatest([
@@ -30,7 +30,7 @@
         return sourceAmount;
       }
 
-      if (sourceAmount.code === "USD") {
+      if (sourceAmount.code === Currency.USD) {
         return convertToForeign(sourceAmount, $usdAudRate?.value, code);
       }
 
@@ -40,7 +40,7 @@
 </script>
 
 {#if isNumber($targetAmount?.value)}
-  {#if isNegative($targetAmount)}-{/if}{$targetAmount.code === "USD" ? "U" : "A"}$<Number
+  {#if isNegative($targetAmount)}-{/if}{$targetAmount.code === Currency.USD ? "U" : "A"}$<Number
     value={$targetAmount.value}
     unsigned
   />

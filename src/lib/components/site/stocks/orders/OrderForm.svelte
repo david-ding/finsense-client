@@ -1,18 +1,20 @@
 <script lang="ts">
-  import { setContext } from "svelte";
-  import type { SelectOption } from "svelte-selectbox";
-  import type { Order, OrderType } from "$lib/entities/order";
-  import { validationErrors } from "$lib/stores/features/orders/orders.derived-stores";
-  import { stockSymbolsApiEndpoints } from "$lib/stores/features/stock-symbols/stock-symbols.api";
-  import { stockSymbolOptions } from "$lib/stores/features/stock-symbols/stock-symbols.derived-stores";
-  import { stockSymbolsActions } from "$lib/stores/features/stock-symbols/stock-symbols.store";
-  import { dispatch } from "$lib/stores/redux-store";
   import CurrencyInput from "$lib/components/common/form/CurrencyInput.svelte";
   import DateInput from "$lib/components/common/form/DateInput.svelte";
   import FormField from "$lib/components/common/form/FormField.svelte";
   import Input from "$lib/components/common/form/Input.svelte";
   import Select from "$lib/components/common/form/Select.svelte";
   import Typeahead from "$lib/components/common/form/Typeahead.svelte";
+  import { Currency } from "$lib/entities/currency-amount";
+  import type { Order, OrderType } from "$lib/entities/order";
+  import { validationErrors } from "$lib/stores/features/orders/orders.derived-stores";
+  import { stockSymbolsApiEndpoints } from "$lib/stores/features/stock-symbols/stock-symbols.api";
+  import { stockSymbolOptions } from "$lib/stores/features/stock-symbols/stock-symbols.derived-stores";
+  import { stockSymbolsActions } from "$lib/stores/features/stock-symbols/stock-symbols.store";
+  import { dispatch } from "$lib/stores/redux-store";
+  import { isUSSymbol } from "$lib/utils/symbol.utils";
+  import { setContext } from "svelte";
+  import type { SelectOption } from "svelte-selectbox";
 
   const ORDER_TYPE_OPTIONS: Array<SelectOption> = [
     { value: "buy", label: "Buy" },
@@ -29,7 +31,7 @@
   const resetStockSymbols = () => dispatch(stockSymbolsActions.reset());
   const setCurrencyCode = (event: CustomEvent) => {
     const stockSymbol = event.detail;
-    currencyCode = stockSymbol.value.endsWith(".AU") ? "AUD" : "USD";
+    currencyCode = isUSSymbol(stockSymbol) ? Currency.USD : Currency.AUD;
   };
 </script>
 

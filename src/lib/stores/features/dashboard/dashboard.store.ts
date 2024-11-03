@@ -1,3 +1,4 @@
+import { Currency } from "$lib/entities/currency-amount";
 import { createSlice } from "@reduxjs/toolkit";
 
 export type DashboardState = {
@@ -5,7 +6,7 @@ export type DashboardState = {
 };
 
 const initialState: DashboardState = {
-  targetCurrencyCode: "USD",
+  targetCurrencyCode: Currency.USD,
 };
 
 const dashboardSlice = createSlice({

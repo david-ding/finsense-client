@@ -1,4 +1,4 @@
-import type { CurrencyAmount } from "$lib/entities/currency-amount";
+import { Currency, type CurrencyAmount } from "$lib/entities/currency-amount";
 
 export const zero = (code?: string): CurrencyAmount => ({
   code,
@@ -6,7 +6,7 @@ export const zero = (code?: string): CurrencyAmount => ({
 });
 
 export const createCurrencyAmount = (value: number | string, code?: string): CurrencyAmount => {
-  code = code || "AUD";
+  code = code || Currency.AUD;
 
   if (typeof value === "string") {
     const parsedValue = parseFloat(value.replaceAll(/[^0-9.]/g, ""));
@@ -16,13 +16,13 @@ export const createCurrencyAmount = (value: number | string, code?: string): Cur
 };
 
 export const add = (...amounts: Array<CurrencyAmount>): CurrencyAmount => {
-  const code = amounts.find((amount) => !!amount.code)?.code || "AUD";
+  const code = amounts.find((amount) => !!amount.code)?.code || Currency.AUD;
   const sumCents = amounts.reduce((_sum, amount) => _sum + amount.value * 100, 0);
   return { code, value: sumCents / 100 };
 };
 
 export const subtract = (amount1: CurrencyAmount, amount2: CurrencyAmount): CurrencyAmount => {
-  const code = amount1.code || amount2.code || "AUD";
+  const code = amount1.code || amount2.code || Currency.AUD;
   const diffCents = amount1.value * 100 - amount2.value * 100;
   return { code, value: diffCents / 100 };
 };
@@ -49,7 +49,7 @@ export const percentageOf = (amount1: CurrencyAmount, amount2: CurrencyAmount): 
 export const convertToForeign = (
   amount: CurrencyAmount,
   exchangeRate: number,
-  foreignCurrencyCode: string = "AUD",
+  foreignCurrencyCode: string = Currency.AUD,
 ): CurrencyAmount => ({
   ...multiply(amount, exchangeRate),
   code: foreignCurrencyCode,

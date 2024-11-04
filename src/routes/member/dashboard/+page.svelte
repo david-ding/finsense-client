@@ -162,9 +162,10 @@
   </StatsCard>
 </div>
 
-<div class="flex justify-between items-center mt-4">
+<div class="flex flex-col mt-4 lg:flex-row lg:justify-between lg:items-center">
   <h3 class="mt-4">Holdings</h3>
   <ButtonGroup
+    class="w-full lg:w-1/3"
     items={[
       {
         label: "All",

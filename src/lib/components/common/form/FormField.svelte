@@ -1,14 +1,14 @@
 <script lang="ts">
-  import { isEmpty, negate } from "lodash-es";
-  import { map } from "rxjs/operators";
-  import { getContext, setContext } from "svelte";
-  import type { ClassNames } from "svelte-selectbox/types";
-  import { readable } from "svelte/store";
-  import type { Readable } from "svelte/store";
+  import Tooltip from "$lib/components/common/Tooltip.svelte";
+  import type { ClassNames } from "$lib/entities/class-names";
   import type { ValidationErrors } from "$lib/entities/validation-errors";
   import mergeClassNames from "$lib/utils/merge-class-names";
   import { observe } from "$lib/utils/store.utils";
-  import Tooltip from "$lib/components/common/Tooltip.svelte";
+  import { isEmpty, negate } from "lodash-es";
+  import { map } from "rxjs/operators";
+  import { getContext, setContext } from "svelte";
+  import type { Readable } from "svelte/store";
+  import { readable } from "svelte/store";
 
   let classNames: ClassNames = null;
   export let name: string;

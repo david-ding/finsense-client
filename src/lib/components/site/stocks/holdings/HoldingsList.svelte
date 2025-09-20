@@ -51,8 +51,8 @@
 </script>
 
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { derived } from "svelte/store";
+  import { getContext, onMount } from "svelte";
+  import { derived, type Readable } from "svelte/store";
   import type { ClassNames } from "$lib/entities/class-names";
   import type { CurrencyAmount } from "$lib/entities/currency-amount";
   import type { Holding } from "$lib/entities/holding";
@@ -85,6 +85,8 @@
   ];
 
   onMount(() => dispatch(holdingsApiEndpoints.index.initiate()));
+
+  const targetCurrencyCode = getContext<Readable<string>>("targetCurrencyCode");
 </script>
 
 <Table
@@ -101,12 +103,18 @@
   >
     {#if column.prop === "avgPrice" || column.prop === "marketValue" || column.prop === "price"}
       <TrackedNumberic value={row[column.prop].value}>
-        <CurrencyAmountFormatter amount={row[column.prop]} />
+        <CurrencyAmountFormatter
+          amount={row[column.prop]}
+          targetCurrencyCode={$targetCurrencyCode}
+        />
       </TrackedNumberic>
     {:else if column.prop === "gainLoss" || column.prop === "dayGainLoss"}
       <TrackedNumberic value={row[`${column.prop}Amount`].value}>
         <ColoredGainLossStat amount={row[`${column.prop}Amount`]}>
-          <CurrencyAmountFormatter amount={row[`${column.prop}Amount`]} />
+          <CurrencyAmountFormatter
+            amount={row[`${column.prop}Amount`]}
+            targetCurrencyCode={$targetCurrencyCode}
+          />
           ({row[`${column.prop}Percent`]})
         </ColoredGainLossStat>
       </TrackedNumberic>

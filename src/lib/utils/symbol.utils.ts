@@ -6,5 +6,5 @@ export const getExchangeFromSymbol = (symbol: string): string => {
   return exchange ?? Exchange.US;
 };
 
-export const isUSSymbol = (symbol: string): boolean =>
-  getExchangeFromSymbol(symbol) === Exchange.US;
+export const isAUSymbol = (symbol: string): boolean =>
+  getExchangeFromSymbol(symbol) === Exchange.AU;

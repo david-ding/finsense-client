@@ -1,6 +1,7 @@
 import { rootStore } from "$lib/stores/root-store";
 import { add, multiply, percentageOf, subtract } from "$lib/utils/currency-amount.utils";
-import { getExchangeFromSymbol, isUSSymbol } from "$lib/utils/symbol.utils";
+import { getExchangeFromSymbol, isAUSymbol } from "$lib/utils/symbol.utils";
+import { negate } from "lodash-es";
 import { derived } from "svelte/store";
 
 export const holdingsStore = derived(rootStore(), ($rootStore) => $rootStore.holdings);
@@ -27,7 +28,7 @@ export const isLoading = derived(holdingsStore, ($holdingsStore) => $holdingsSto
 
 export const symbols = derived(holdingsStore, ($holdingsStore) => $holdingsStore.ids);
 
-export const usSymbols = derived(symbols, ($symbols) => $symbols.filter(isUSSymbol));
+export const usSymbols = derived(symbols, ($symbols) => $symbols.filter(negate(isAUSymbol)));
 
 export const totalCost = derived(holdings, ($holdings) =>
   add(...$holdings.map((holding) => multiply(holding.avgPrice, holding.quantity))),

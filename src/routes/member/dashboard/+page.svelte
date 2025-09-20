@@ -122,7 +122,10 @@
   >
     <svelte:fragment slot="label">Market Value</svelte:fragment>
     <svelte:fragment slot="value">
-      <CurrencyAmountFormatter amount={$totalMarketValue} />
+      <CurrencyAmountFormatter
+        amount={$totalMarketValue}
+        targetCurrencyCode={$targetCurrencyCode}
+      />
     </svelte:fragment>
   </StatsCard>
   <StatsCard
@@ -134,7 +137,10 @@
       amount={$gain}
       slot="value"
     >
-      <CurrencyAmountFormatter amount={$gain} />
+      <CurrencyAmountFormatter
+        amount={$gain}
+        targetCurrencyCode={$targetCurrencyCode}
+      />
       ({$gainPercentage})
     </ColoredGainLossStat>
   </StatsCard>
@@ -147,7 +153,10 @@
       amount={$dayGain}
       slot="value"
     >
-      <CurrencyAmountFormatter amount={$dayGain} />
+      <CurrencyAmountFormatter
+        amount={$dayGain}
+        targetCurrencyCode={$targetCurrencyCode}
+      />
       ({$dayGainPercentage})
     </ColoredGainLossStat>
   </StatsCard>

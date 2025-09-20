@@ -12,7 +12,7 @@
   import { stockSymbolOptions } from "$lib/stores/features/stock-symbols/stock-symbols.derived-stores";
   import { stockSymbolsActions } from "$lib/stores/features/stock-symbols/stock-symbols.store";
   import { dispatch } from "$lib/stores/redux-store";
-  import { isUSSymbol } from "$lib/utils/symbol.utils";
+  import { isAUSymbol } from "$lib/utils/symbol.utils";
   import { setContext } from "svelte";
   import type { SelectOption } from "svelte-selectbox";
 
@@ -30,8 +30,8 @@
 
   const resetStockSymbols = () => dispatch(stockSymbolsActions.reset());
   const setCurrencyCode = (event: CustomEvent) => {
-    const stockSymbol = event.detail;
-    currencyCode = isUSSymbol(stockSymbol) ? Currency.USD : Currency.AUD;
+    const stockSymbol = event.detail as SelectOption;
+    currencyCode = isAUSymbol(stockSymbol.value as string) ? Currency.AUD : Currency.USD;
   };
 </script>
 

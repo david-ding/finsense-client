@@ -69,6 +69,10 @@
   import Table from "$lib/components/common/Table.svelte";
   import type { TableColumn } from "$lib/components/common/Table.svelte";
   import TrackedNumberic from "$lib/components/common/TrackedNumberic.svelte";
+  import Button from "$lib/components/common/Button.svelte";
+  import { holdingsActions } from "$lib/stores/features/holdings/holdings.store";
+  import { priceHistoryActions } from "$lib/stores/features/price-history/price-history.store";
+  import { priceHistoryApiEndpoints } from "$lib/stores/features/price-history/price-history.api";
 
   let classNames: ClassNames = null;
   export { classNames as class };
@@ -87,6 +91,11 @@
   onMount(() => dispatch(holdingsApiEndpoints.index.initiate()));
 
   const targetCurrencyCode = getContext<Readable<string>>("targetCurrencyCode");
+
+  function handleHoldingClick(symbol: string) {
+    dispatch(holdingsActions.showHoldingsModal({ symbol }));
+    dispatch(priceHistoryApiEndpoints.symbolPriceHistory.initiate(symbol));
+  }
 </script>
 
 <Table
@@ -118,6 +127,10 @@
           ({row[`${column.prop}Percent`]})
         </ColoredGainLossStat>
       </TrackedNumberic>
+    {:else if column.prop === "symbol"}
+      <Button on:click={() => handleHoldingClick(row.symbol)}>
+        {row.symbol}
+      </Button>
     {:else}
       {row[column.prop]}
     {/if}

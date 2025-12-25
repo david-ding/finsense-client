@@ -30,9 +30,7 @@ const exchangeRatesSlice = createSlice({
   name: "exchangeRates",
   initialState,
   reducers: {
-    reset: () => {
-      return initialState;
-    },
+    reset: () => initialState,
   },
   extraReducers: (builder) => {
     builder.addMatcher(pendingAction, (state) => ({

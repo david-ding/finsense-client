@@ -17,6 +17,11 @@ export const holdings = derived(holdingsStore, ($holdingsStore) =>
     }),
 );
 
+export const getHoldingBySymbol = derived(
+  holdings,
+  ($holdings) => (symbol: string) => $holdings.find((h) => h.symbol === symbol),
+);
+
 export const exchangeFilter = derived(
   holdingsStore,
   ($holdingsStore) => $holdingsStore.exchangeFilter,
@@ -29,6 +34,11 @@ export const isLoading = derived(holdingsStore, ($holdingsStore) => $holdingsSto
 export const symbols = derived(holdingsStore, ($holdingsStore) => $holdingsStore.ids);
 
 export const usSymbols = derived(symbols, ($symbols) => $symbols.filter(negate(isAUSymbol)));
+
+export const holdingModalDisplayed = derived(
+  holdingsStore,
+  ($holdingsStore) => $holdingsStore.holdingsModalDisplayed,
+);
 
 export const totalCost = derived(holdings, ($holdings) =>
   add(...$holdings.map((holding) => multiply(holding.avgPrice, holding.quantity))),

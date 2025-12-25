@@ -17,6 +17,8 @@ import type { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import type { UnknownAction } from "redux";
 import { Subject } from "rxjs";
 import { authApi } from "./features/auth/auth.api";
+import { priceHistoryApi } from "./features/price-history/price-history.api";
+import priceHistoryReducer from "./features/price-history/price-history.store";
 
 const isFetchBaseQueryError = (error: unknown): error is FetchBaseQueryError => {
   return typeof error === "object" && error != null && "status" in error;
@@ -66,6 +68,8 @@ const reduxStore = configureStore({
     dashboard: dashboardReducer,
     auth: authReducer,
     [authApi.reducerPath]: authApi.reducer,
+    priceHistory: priceHistoryReducer,
+    [priceHistoryApi.reducerPath]: priceHistoryApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
@@ -76,7 +80,8 @@ const reduxStore = configureStore({
       .concat(stockSplitsApi.middleware)
       .concat(exchangeRatesApi.middleware)
       .concat(holdingsApi.middleware)
-      .concat(authApi.middleware),
+      .concat(authApi.middleware)
+      .concat(priceHistoryApi.middleware),
 });
 
 export type RootState = ReturnType<typeof reduxStore.getState>;

@@ -8,6 +8,7 @@ export type HoldingsState = {
   isLiveMode: boolean;
   isLoading: boolean;
   exchangeFilter: Exchange;
+  holdingsModalDisplayed: { symbol: string };
 } & EntityState<Holding, string>;
 
 const holdingsAdapter = createEntityAdapter({
@@ -19,6 +20,7 @@ const initialState: HoldingsState = {
   isLiveMode: false,
   isLoading: false,
   exchangeFilter: undefined,
+  holdingsModalDisplayed: null,
 };
 
 const { matchPending: indexMatchPending, matchFulfilled: indexMatchFulfilled } =
@@ -41,6 +43,12 @@ const holdingsSlice = createSlice({
     },
     setExchangeFilter: (state, { payload }) => {
       state.exchangeFilter = payload;
+    },
+    showHoldingsModal: (state, { payload: { symbol } }) => {
+      state.holdingsModalDisplayed = { symbol };
+    },
+    closeHoldingsModal: (state) => {
+      state.holdingsModalDisplayed = null;
     },
   },
   extraReducers: (builder) => {

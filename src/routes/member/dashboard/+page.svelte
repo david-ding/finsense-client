@@ -7,6 +7,7 @@
   import OnlineIcon from "$lib/components/common/icons/OnlineIcon.svelte";
   import RefreshIcon from "$lib/components/common/icons/RefreshIcon.svelte";
   import StatsCard from "$lib/components/common/StatsCard.svelte";
+  import HoldingModal from "$lib/components/site/stocks/holdings/HoldingModal.svelte";
   import HoldingsList from "$lib/components/site/stocks/holdings/HoldingsList.svelte";
   import { Currency } from "$lib/entities/currency-amount";
   import { Exchange } from "$lib/entities/exchange";
@@ -198,3 +199,5 @@
   />
 </div>
 <HoldingsList class="mt-4" />
+
+<HoldingModal />

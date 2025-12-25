@@ -18,6 +18,9 @@ export const holdingsApi = createApi({
         };
       },
     }),
+    priceHistory: builder.query<Array<{ date: string; price: number }>, { symbol: string }>({
+      query: ({ symbol }) => `/holdings/${symbol}/priceHistory`,
+    }),
   }),
 });
 
